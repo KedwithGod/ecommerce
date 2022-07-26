@@ -2,17 +2,17 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 class CartFirstPageViewModel extends BaseModel{
   // cart value
-  int cartValue=1;
+  List<int> cartValue=[];
 
   // increment value
-  increment(){
-    cartValue++;
+  increment(int index){
+    cartValue[index]++;
     notifyListeners();
   }
 
   // decrement value
-  decrement(){
-    cartValue--;
+  decrement(int index){
+    cartValue[index]--;
     notifyListeners();
   }
   // check box
@@ -20,6 +20,7 @@ class CartFirstPageViewModel extends BaseModel{
 
   initializeCheck(){
     isChecked = List<bool>.filled(5, false);
+    cartValue=List.generate(5, (index) => 1);
     notifyListeners();
   }
 

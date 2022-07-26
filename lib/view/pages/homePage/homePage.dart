@@ -1,6 +1,5 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -103,7 +102,8 @@ class HomePage extends StatelessWidget {
                     // category
                     rowPositioned(
                         child: GeneralTextDisplay(
-                            "Category", black, 1, 15, FontWeight.w500, "category"),
+                            "Category", black, 1, 15,
+                            FontWeight.w600, "category"),
                         top: 340,left:20),
 
                     // see all
@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                           height: sS(context).cH(height: 20),
                           decoration: BoxDecoration(
 
-                            color: petiteOrchid.withOpacity(0.7),
+                            color: fountainBlue.withOpacity(0.3),
                             borderRadius: BorderRadius.all(
                               Radius.circular(sS(context).cH(height: 15)),
 
@@ -121,7 +121,7 @@ class HomePage extends StatelessWidget {
                           ),
                           alignment: Alignment.center,
                           child: GeneralTextDisplay(
-                              "See All", white, 1, 12, FontWeight.w400, "see all",
+                              "See All", black51, 1, 12, FontWeight.w400, "see all",
                           ),
                         ),
                         top: 340,right:25),
@@ -234,7 +234,7 @@ class HomePage extends StatelessWidget {
                                                 w: 285,
                                                 child: GeneralTextDisplay(
                                                     "A wealthy character might show off their expensive clothing. But they could also dress in modest, inexpensive-looking clothes.",
-                                                    regentGray, 5, 13, FontWeight.w500, "title"),
+                                                    regentGray, 5, 13, FontWeight.w500, "details"),
                                               ),
                                               top: 50,left:20,right:20),
                                           // photo

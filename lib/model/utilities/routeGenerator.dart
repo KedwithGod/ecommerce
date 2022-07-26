@@ -9,7 +9,16 @@ class RouteGenerator {
         return materialPage(settings,const HomePage());
       case '/cartFirstPage':
         return materialPage(settings,const CartFirstPage());
-
+      case '/categoryHomePage':
+        return materialPage(settings,const CategoryHomePage());
+      case '/categoryList':
+        return materialPage(settings, CategoryList(
+            selectedCategory:settings.arguments as List<int>
+        ));
+      case '/productPage':
+        return materialPage(settings,const ProductPage());
+      case '/favoritePage':
+        return materialPage(settings,const FavoritePage());
 
 
 

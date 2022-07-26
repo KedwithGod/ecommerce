@@ -91,19 +91,19 @@ class CartFirstPage extends StatelessWidget {
                                     // subtract
                                     GestureDetector(
                                         onTap: () {
-                                          model.decrement();
+                                          model.decrement(index);
                                         },
                                         child: GeneralIconDisplay(LineIcons.minus,
                                             regentGray, UniqueKey(), 15)),
                                     // value
                                     S(w: 15),
-                                    GeneralTextDisplay(model.cartValue.toString(),
+                                    GeneralTextDisplay(model.cartValue[index].toString(),
                                         black, 1, 13, FontWeight.w600, "title"),
                                     // add
                                     S(w: 15),
                                     GestureDetector(
                                         onTap: () {
-                                          model.increment();
+                                          model.increment(index);
                                         },
                                         child: GeneralIconDisplay(LineIcons.plus,
                                             primary, UniqueKey(), 16.5))

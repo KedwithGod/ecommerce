@@ -45,13 +45,17 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
               isSelected:tabEnum==TabEnum.categories?true:false,left:172,
               navigation: tabEnum==TabEnum.categories?(){}:
                   (){
-                Navigator.pushNamed(context, '/circleHomePage');
+                Navigator.pushNamed(context, '/categoryHomePage');
               }
           ),
           // favorite page
           tabWidget(context, icon: tabEnum==TabEnum.favorite?
           FontAwesomeIcons.solidHeart:LineIcons.heart,
-              isSelected:tabEnum==TabEnum.favorite?true:false,right:100),
+              isSelected:tabEnum==TabEnum.favorite?true:false,right:100,
+              navigation: tabEnum==TabEnum.favorite?(){}:
+                  (){
+                Navigator.pushNamed(context, '/favoritePage');
+              }),
           // profile page
       tabWidget(context, icon: tabEnum==TabEnum.profile?
       FontAwesomeIcons.solidUser:LineIcons.user,
