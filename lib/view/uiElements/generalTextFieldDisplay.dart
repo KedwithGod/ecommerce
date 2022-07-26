@@ -186,11 +186,11 @@ class FormattedTextFields extends StatelessWidget {
       height:sS(context).cH(height: height),
       width:sS(context).cW(width: width),
       decoration: BoxDecoration(
-          color:black,
+          color:white,
           borderRadius: BorderRadius.circular( MediaQuery.of(context).size.height * (borderRadius/ 768)),
 
           border: Border.all(
-              color: errorTextActive==true?error:const Color.fromRGBO(51, 51, 57, 1),
+              color: errorTextActive==true?error:transparent,
               width: errorTextActive==true?2.0:0.0,
               style: BorderStyle.solid
           )      ),
@@ -222,14 +222,16 @@ class FormattedTextFields extends StatelessWidget {
             labelStyle: GoogleFonts.montserrat(
                 textStyle:TextStyle(
                     fontSize: sS(context).cH(height: hintFont),
-                    color: white,
+                    color: black,
                     fontWeight: hintFontWeight)),
+            alignLabelWithHint: false,
             hintStyle:  GoogleFonts.montserrat(
                 textStyle:TextStyle(
                     fontSize: sS(context).cH(height: hintFont),
                     color: hintColor,
                     fontWeight: hintFontWeight)),
             hintText: textFieldHint,
+
             contentPadding: contentPadding,
             floatingLabelBehavior: floatingBehaviour??FloatingLabelBehavior.auto,
             enabledBorder: OutlineInputBorder(

@@ -5,6 +5,11 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     switch (settings.name) {
+      // authentication
+      case '/login':
+        return materialPage(settings,const LoginPage());
+
+        // main pages
       case '/homePage':
         return materialPage(settings,const HomePage());
       case '/cartFirstPage':

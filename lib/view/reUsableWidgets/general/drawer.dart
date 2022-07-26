@@ -37,9 +37,15 @@ Widget drawer (context,{required Widget child,AdvancedDrawerController? controll
               left: 24
             ),
             // edit profile
-            drawerItem(Icons.account_box_rounded,"Login", 78),
+            drawerItem(Icons.account_box_rounded,"Login", 78,onTap: (){
+              Navigator.pushNamed(context, '/login',
+              );
+            }),
             // account
-            drawerItem(Icons.favorite, "My Wish List", 126),
+            drawerItem(Icons.favorite, "My Wish List", 126,onTap:(){
+              Navigator.pushNamed(context, '/favoritePage',
+              );
+            }),
             // statement
             drawerItem(FontAwesomeIcons.bell, "Get Notification", 174),
             // link account
@@ -70,16 +76,21 @@ Widget drawer (context,{required Widget child,AdvancedDrawerController? controll
 }
 
 
-Widget drawerItem(IconData icon,String name,double top, {Color? color}){
+Widget drawerItem(IconData icon,String name,double top, {Color? color,Function? onTap}){
   return  rowPositioned(
-      child: Row(
-        children: [
-          Center(child: GeneralIconDisplay(icon, color??primary, UniqueKey(), 16))
-          ,
-          S(w:14),
-           GeneralTextDisplay(name, color??black,
-              1, 14, FontWeight.w500, "text",letterSpacing: 0.8,),
-        ],
+      child: GestureDetector(
+        onTap: (){
+          onTap!();
+        },
+        child: Row(
+          children: [
+            Center(child: GeneralIconDisplay(icon, color??primary, UniqueKey(), 16))
+            ,
+            S(w:14),
+             GeneralTextDisplay(name, color??black,
+                1, 14, FontWeight.w500, "text",letterSpacing: 0.8,),
+          ],
+        ),
       ) ,top: top,
       left: 24
   );

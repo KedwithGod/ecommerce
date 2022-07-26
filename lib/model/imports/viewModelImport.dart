@@ -5,3 +5,4 @@ export 'package:ecommerce/viewModel/productPageViewModel/productPageViewModel.da
 export 'package:ecommerce/viewModel/homePageViewModel/homePageViewModel.dart';
 export 'package:ecommerce/viewModel/accountViewModel/accountViewModel.dart';
 export '../../../viewModel/favoriteViewModel/favoriteViewModel.dart';
+export '../../../viewModel/authentication/loginViewModel.dart';

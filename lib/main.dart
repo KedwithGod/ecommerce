@@ -2,6 +2,7 @@
 
 import 'package:ecommerce/model/imports/generalImport.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,11 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Cardizerr',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const LoginPage(),
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
