@@ -19,6 +19,8 @@ class RouteGenerator {
         return materialPage(settings,const ProductPage());
       case '/favoritePage':
         return materialPage(settings,const FavoritePage());
+      case '/accountPage':
+        return materialPage(settings,const AccountPage());
 
 
 

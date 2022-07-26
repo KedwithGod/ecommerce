@@ -52,14 +52,18 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
           tabWidget(context, icon: tabEnum==TabEnum.favorite?
           FontAwesomeIcons.solidHeart:LineIcons.heart,
               isSelected:tabEnum==TabEnum.favorite?true:false,right:100,
-              navigation: tabEnum==TabEnum.favorite?(){}:
+              navigation:tabEnum==TabEnum.favorite?(){}:
                   (){
                 Navigator.pushNamed(context, '/favoritePage');
               }),
           // profile page
       tabWidget(context, icon: tabEnum==TabEnum.profile?
       FontAwesomeIcons.solidUser:LineIcons.user,
-          isSelected:tabEnum==TabEnum.profile?true:false,right:25),
+          isSelected:tabEnum==TabEnum.profile?true:false,right:25,
+          navigation: tabEnum==TabEnum.profile?(){}:
+        (){
+  Navigator.pushNamed(context, '/accountPage');
+  }),
         ],
       ),
     ), top:top?? 670,

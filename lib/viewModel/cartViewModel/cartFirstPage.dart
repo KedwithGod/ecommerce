@@ -29,6 +29,8 @@ class CartFirstPageViewModel extends BaseModel{
     isChecked[index]=value;
     notifyListeners();
   }
+
+  final advancedDrawerController = AdvancedDrawerController();
 }
 
 
