@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                       rowPositioned(child:
                       Container(
                         width: sS(context).cW(width: 325),
-                        height: sS(context).cH(height: 150),
+                        height: sS(context).cH(height: 100),
                         decoration: BoxDecoration(
                           color: desertStorm,
                           image:const DecorationImage(
