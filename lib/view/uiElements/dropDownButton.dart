@@ -35,7 +35,7 @@ class DropDown extends StatelessWidget {
             child: DropdownButton(
               icon:Padding(
                 padding:  EdgeInsets.only(right: sS(context).cW(width: 16.41)),
-                child: GeneralIconDisplay(LineIcons.angleDown,black,UniqueKey(),15),
+                child: GeneralIconDisplay(LineIcons.angleDown,secondaryColor,UniqueKey(),15),
               ),
               focusNode: focusNode,
               dropdownColor: white,

@@ -6,3 +6,4 @@ export 'package:ecommerce/viewModel/homePageViewModel/homePageViewModel.dart';
 export 'package:ecommerce/viewModel/accountViewModel/accountViewModel.dart';
 export '../../../viewModel/favoriteViewModel/favoriteViewModel.dart';
 export '../../../viewModel/authentication/loginViewModel.dart';
+export 'package:ecommerce/viewModel/splashScreenViewModel.dart';

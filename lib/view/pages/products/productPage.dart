@@ -25,7 +25,7 @@ class ProductPage extends StatelessWidget {
             BoxShadow(
                 offset: const Offset(0, 4),
                 blurRadius: 12,
-                color: black.withOpacity(0.25))
+                color: secondaryColor.withOpacity(0.25))
           ],
           color: white,
           borderRadius: BorderRadius.only(
@@ -68,7 +68,7 @@ class ProductPage extends StatelessWidget {
 
       // title
       rowPositioned(child:GeneralTextDisplay(
-          "Warm Zipper", black, 1, 20, FontWeight.w800, "title"),top: 420,left: 20),
+          "Warm Zipper", secondaryColor, 1, 20, FontWeight.w800, "title"),top: 420,left: 20),
       // subtitle
       rowPositioned(child:GeneralTextDisplay(
           "Hooded jacket", regentGray, 1, 12, FontWeight.w400, "title"),top: 450,left: 22),

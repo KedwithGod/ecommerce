@@ -18,14 +18,14 @@ List<int> itemCount=List.generate(10, (index) => index);
 // initialize lists
   initializeCheck(){
     isSelected = List<bool>.filled(10, false);
-    itemColor=List<Color>.filled(10, black);
+    itemColor=List<Color>.filled(10, secondaryColor);
     notifyListeners();
   }
 
   // change item color to white, once it is selected
   onSelected(int index){
     isSelected[index]=!isSelected[index];
-    itemColor[index]==black?itemColor[index]=white:itemColor[index]=black;
+    itemColor[index]==secondaryColor?itemColor[index]=white:itemColor[index]=secondaryColor;
     if(selectedIndex.contains(index)){
       selectedIndex.remove(index);
     }

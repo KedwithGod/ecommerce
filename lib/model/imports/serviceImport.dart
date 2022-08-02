@@ -1,0 +1,1 @@
+export 'package:ecommerce/model/models/customers/customerResponse.dart';

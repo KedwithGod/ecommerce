@@ -21,7 +21,7 @@ class CategoryList extends StatelessWidget {
               //2. hence all category will be displayed
               rowPositioned(
                 child: GeneralTextDisplay(
-                    selectedCategory.isEmpty? "All Categories":"Selected Category", black, 1, 20, FontWeight.w600, "title"),
+                    selectedCategory.isEmpty? "All Categories":"Selected Category", secondaryColor, 1, 20, FontWeight.w600, "title"),
                 top: 20,
               ),
               Positioned(
@@ -46,7 +46,7 @@ class CategoryList extends StatelessWidget {
 
                                     ),
                                   ),
-                                  alignment: Alignment.center,child: GeneralTextDisplay(model.name[index], black, 1, 15, FontWeight.w600, "name")),
+                                  alignment: Alignment.center,child: GeneralTextDisplay(model.name[index], secondaryColor, 1, 15, FontWeight.w600, "name")),
                               S(h:10),
                               S(
                                 w: 160 * 5,
@@ -73,7 +73,7 @@ class CategoryList extends StatelessWidget {
                                                   BoxShadow(
                                                       offset: const Offset(0, 4),
                                                       blurRadius: 12,
-                                                      color: black.withOpacity(0.25))
+                                                      color: secondaryColor.withOpacity(0.25))
                                                 ],
                                                 color: white,
                                                 borderRadius: BorderRadius.all(
@@ -85,7 +85,7 @@ class CategoryList extends StatelessWidget {
                                           ),
                                           // category name
                                           S(h: 10),
-                                          GeneralTextDisplay("item Name", black, 1,
+                                          GeneralTextDisplay("item Name", secondaryColor, 1,
                                               13, FontWeight.w400, "item name"),
                                         ],
                                       );
@@ -118,7 +118,7 @@ class CategoryList extends StatelessWidget {
 
                                       ),
                                     ),
-                                    alignment: Alignment.center,child: GeneralTextDisplay(model.name[index], black, 1, 15, FontWeight.w600, "name")),
+                                    alignment: Alignment.center,child: GeneralTextDisplay(model.name[index], secondaryColor, 1, 15, FontWeight.w600, "name")),
                                 S(h:10),
                                 S(
                                   w: 160 * 5,
@@ -141,7 +141,7 @@ class CategoryList extends StatelessWidget {
                                                   BoxShadow(
                                                       offset: const Offset(0, 4),
                                                       blurRadius: 12,
-                                                      color: black.withOpacity(0.25))
+                                                      color: secondaryColor.withOpacity(0.25))
                                                 ],
                                                 color: white,
                                                 borderRadius: BorderRadius.all(
@@ -152,7 +152,7 @@ class CategoryList extends StatelessWidget {
                                             ),
                                             // category name
                                             S(h: 10),
-                                            GeneralTextDisplay("item Name", black, 1,
+                                            GeneralTextDisplay("item Name", secondaryColor, 1,
                                                 13, FontWeight.w400, "item name"),
                                           ],
                                         );

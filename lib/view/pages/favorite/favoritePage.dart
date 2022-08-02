@@ -18,13 +18,13 @@ class FavoritePage extends StatelessWidget {
           onTap: () {
         model.advancedDrawerController.showDrawer();
         },
-        child: GeneralIconDisplay(Icons.menu, black, UniqueKey(), 20)),
+        child: GeneralIconDisplay(Icons.menu, secondaryColor, UniqueKey(), 20)),
             top: 25,
             left: 20),
         // title
         rowPositioned(
           child: GeneralTextDisplay(
-              "My WishList", black, 1, 20, FontWeight.w600, "title"),
+              "My WishList", secondaryColor, 1, 20, FontWeight.w600, "title"),
           top: 20,
         ),
         // list of items in cart
@@ -51,7 +51,7 @@ class FavoritePage extends StatelessWidget {
                                alignment: Alignment.center,
 
                                child: GeneralTextDisplay(
-                                   "${index+1}", black, 1, 15, FontWeight.w400, "index")),
+                                   "${index+1}", secondaryColor, 1, 15, FontWeight.w400, "index")),
                             S(w: 15),
                             // item image
                             Container(
@@ -76,7 +76,7 @@ class FavoritePage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // name
-                                GeneralTextDisplay("Red Wide Gown", black, 1,
+                                GeneralTextDisplay("Red Wide Gown", secondaryColor, 1,
                                     12, FontWeight.w600, "name"),
                                 // description
                                 S(h: 5),

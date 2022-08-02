@@ -1,4 +1,5 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
+import 'package:ecommerce/model/services/accountService/wooCommerceAuth/wooCommerceSignIn.dart';
 
 class LoginViewModel extends BaseModel{
   //  text field controller
@@ -10,4 +11,9 @@ class LoginViewModel extends BaseModel{
   // focus node
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
+  
+  // function to retrieve User
+  getUser()async{
+   await NewWooCommerceUser.createNewWooCommerceUser(id: 462);
+  }
 }

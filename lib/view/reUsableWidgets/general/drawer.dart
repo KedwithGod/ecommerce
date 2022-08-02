@@ -32,7 +32,7 @@ Widget drawer (context,{required Widget child,AdvancedDrawerController? controll
           children: [
             // menu
             rowPositioned(
-              child: GeneralTextDisplay("Menu", black,
+              child: GeneralTextDisplay("Menu", secondaryColor,
                   1, 19.08, FontWeight.w500, "500") ,top: 22,
               left: 24
             ),
@@ -65,7 +65,7 @@ Widget drawer (context,{required Widget child,AdvancedDrawerController? controll
             // sign out
            // drawerItem(Icons.logout_rounded, "Sign Out", 622,color:const Color.fromRGBO(255,41,41,1)),
             // version
-            rowPositioned(child:  GeneralTextDisplay("Ver 1.0.0", black.withOpacity(0.5),
+            rowPositioned(child:  GeneralTextDisplay("Ver 1.0.0", secondaryColor.withOpacity(0.5),
                 1, 14, FontWeight.w500, "version",letterSpacing: 0.8,), top: 657,left:24)
           ],
         ) ,
@@ -87,7 +87,7 @@ Widget drawerItem(IconData icon,String name,double top, {Color? color,Function? 
             Center(child: GeneralIconDisplay(icon, color??primary, UniqueKey(), 16))
             ,
             S(w:14),
-             GeneralTextDisplay(name, color??black,
+             GeneralTextDisplay(name, color??secondaryColor,
                 1, 14, FontWeight.w500, "text",letterSpacing: 0.8,),
           ],
         ),

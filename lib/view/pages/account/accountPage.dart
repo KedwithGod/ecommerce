@@ -20,13 +20,13 @@ class AccountPage extends StatelessWidget {
       onTap: () {
         model.advancedDrawerController.showDrawer();
       },
-      child: GeneralIconDisplay(Icons.menu, black, UniqueKey(), 20)),
+      child: GeneralIconDisplay(Icons.menu, secondaryColor, UniqueKey(), 20)),
             top: 25,
             left: 20),
         // title
         rowPositioned(
           child: GeneralTextDisplay(
-              "My Profile", black, 1, 20, FontWeight.w600, "title"),
+              "My Profile", secondaryColor, 1, 20, FontWeight.w600, "title"),
           top: 20,
         ),
         // avatar
@@ -49,7 +49,7 @@ class AccountPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // name
-            GeneralTextDisplay("Daniel Racheal", black, 1,
+            GeneralTextDisplay("Daniel Racheal", secondaryColor, 1,
                 12, FontWeight.w600, "name"),
          // status
             S(h: 5),

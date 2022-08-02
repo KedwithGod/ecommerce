@@ -6,3 +6,4 @@ export 'package:ecommerce/view/pages/products/productPage.dart';
 export 'package:ecommerce/view/pages/favorite/favoritePage.dart';
 export 'package:ecommerce/view/pages/account/accountPage.dart';
 export 'package:ecommerce/view/pages/authentication/loginPage.dart';
+export 'package:ecommerce/view/pages/splashScreen.dart';

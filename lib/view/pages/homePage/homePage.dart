@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
         onModelReady: (model) {
-
+      model.products();
     },
     disposeViewModel: false,
     viewModelBuilder: () => HomePageViewModel(),
@@ -20,18 +20,18 @@ class HomePage extends StatelessWidget {
       onTap: () {
         model.advancedDrawerController.showDrawer();
       },
-      child: GeneralIconDisplay(Icons.menu, black, UniqueKey(), 20)),
+      child: GeneralIconDisplay(Icons.menu, secondaryColor, UniqueKey(), 20)),
             top: 24,
             left: 20),
         // logo
         rowPositioned(
             child: GeneralTextDisplay(
-                "CARDIZERR", black, 1, 20, FontWeight.w800, "title"),
+                "CARDIZERR", secondaryColor, 1, 20, FontWeight.w800, "title"),
             top: 18),
         // notification
         rowPositioned(
             child: GeneralIconDisplay(
-                FontAwesomeIcons.solidBell, black, UniqueKey(), 17),
+                FontAwesomeIcons.solidBell, secondaryColor, UniqueKey(), 17),
             top: 24,
             right: 20),
         Positioned(
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                                 autoPlayAnimationDuration: const Duration(milliseconds: 600),
                                 viewportFraction: 0.6,
                               ),
-                              items: [1, 2, 3,4].map((i) {
+                              items: carousels.map((i) {
                                 return Builder(
                                   builder: (BuildContext context) {
                                     return Padding(
@@ -64,16 +64,13 @@ class HomePage extends StatelessWidget {
                                         width: sS(context).cW(width: 300),
                                         height: sS(context).cH(height: 390),
                                         decoration: BoxDecoration(
-                                          image: DecorationImage(image: AssetImage(i==1?
-                                             "assets/shoe.jpeg" :i==2?
-                                              "assets/shirt.jpeg"
-                                              :i==3?"assets/bag.jpeg":"assets/image.jpeg"),
+                                          image: DecorationImage(image: NetworkImage(i),
                                               fit: BoxFit.fill),
                                           boxShadow: [
                                             BoxShadow(
                                                 offset: const Offset(0,4),
                                                 blurRadius: 12,
-                                                color: black.withOpacity(0.25)
+                                                color: secondaryColor.withOpacity(0.25)
                                             )
                                           ],
                                           color: white,
@@ -114,7 +111,7 @@ class HomePage extends StatelessWidget {
                       // category
                       rowPositioned(
                           child: GeneralTextDisplay(
-                              "Category", black, 1, 15,
+                              "Category", secondaryColor, 1, 15,
                               FontWeight.w600, "category"),
                           top: 340,left:20),
 
@@ -171,7 +168,7 @@ class HomePage extends StatelessWidget {
                                       BoxShadow(
                                           offset: const Offset(0,4),
                                           blurRadius: 12,
-                                          color: black.withOpacity(0.25)
+                                          color: secondaryColor.withOpacity(0.25)
                                       )
                                     ],
                                     color: white,
@@ -183,7 +180,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 // category name
                                 S(h:10),
-                                GeneralTextDisplay("Category Name", black, 1, 13,
+                                GeneralTextDisplay("Category Name", secondaryColor, 1, 13,
                                     FontWeight.w400, "category name"),
                               ],
                             ),
@@ -229,7 +226,7 @@ class HomePage extends StatelessWidget {
                                                 child: Row(
                                                   children: [
                                                     GeneralTextDisplay(
-                                                        "4.7 ", black, 1, 15, FontWeight.w500, "rating"),
+                                                        "4.7 ", secondaryColor, 1, 15, FontWeight.w500, "rating"),
                                                     GeneralIconDisplay(Icons.star, primary, UniqueKey(), 20)
                                                   ],
                                                 ),
@@ -237,7 +234,7 @@ class HomePage extends StatelessWidget {
                                             // title
                                             rowPositioned(
                                                 child: GeneralTextDisplay(
-                                                    "Amazing Dress", black, 1, 15, FontWeight.w500, "title"),
+                                                    "Amazing Dress", secondaryColor, 1, 15, FontWeight.w500, "title"),
                                                 top: 20,left:20),
                                             // details
                                             rowPositioned(

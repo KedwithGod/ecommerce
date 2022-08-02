@@ -20,7 +20,7 @@ class CategoryHomePage extends StatelessWidget {
                     w: 275,
                     child: GeneralTextDisplay(
                       "Choose your favorite fashion categories",
-                      black,
+                      secondaryColor,
                       2,
                       18,
                       FontWeight.w600,

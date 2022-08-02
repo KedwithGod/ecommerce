@@ -5,6 +5,7 @@
 
 import 'package:ecommerce/model/imports/generalImport.dart';
 
+
 class GeneralTextDisplay extends StatelessWidget {
   final String inputText;
   final double? textFontSize,letterSpacing;
@@ -39,7 +40,7 @@ class GeneralTextDisplay extends StatelessWidget {
         dynamicSize.width*(textFontSize!/768),
         fontWeight: textFontWeight,
         decoration: textDecoration??TextDecoration.none,
-        decorationColor: decorationColor??black,
+        decorationColor: decorationColor??secondaryColor,
         decorationStyle: TextDecorationStyle.solid
 
 
@@ -89,7 +90,7 @@ class RubikText extends StatelessWidget {
               dynamicSize.width*(textFontSize!/768),
               fontWeight: textFontWeight,
               decoration: textDecoration??TextDecoration.none,
-              decorationColor: decorationColor??black,
+              decorationColor: decorationColor??secondaryColor,
               decorationStyle: TextDecorationStyle.solid
 
 

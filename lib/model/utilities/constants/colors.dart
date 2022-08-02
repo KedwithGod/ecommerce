@@ -8,9 +8,9 @@ const transparent=Colors.transparent;
 const error =Colors.red;
 
 // color palette
-const Color primary=Color.fromRGBO(245,123,97,1);
-const Color black=Color.fromRGBO(37,39,45,1);
-const textFieldText=Color.fromRGBO(196, 196, 196, 1);
+ Color primary=Color(int.parse("0xffc31c4e"));
+ const Color secondaryColor=Color.fromRGBO(37,39,45,1);
+const textFieldText=Colors.black;
 const black51=Color.fromRGBO(51, 51, 57, 1);
 const fountainBlue=Color.fromRGBO(91, 187, 194,1);
 const desertStorm=Color.fromRGBO(236, 236, 234,1);

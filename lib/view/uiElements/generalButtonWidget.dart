@@ -28,7 +28,7 @@ class ButtonWidget extends StatelessWidget {
             primary: color,
             elevation: noElevation==true?0.0:4.0,
             alignment: align,
-            side:addBorder==true?const BorderSide(
+            side:addBorder==true? BorderSide(
               color: primary
             ):BorderSide.none,
             shape: RoundedRectangleBorder(

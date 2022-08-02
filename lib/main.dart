@@ -3,6 +3,7 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
 
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: const SplashScreen(),
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

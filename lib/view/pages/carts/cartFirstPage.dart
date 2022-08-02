@@ -19,13 +19,13 @@ class CartFirstPage extends StatelessWidget {
           onTap: () {
             model.advancedDrawerController.showDrawer();
             },
-            child:GeneralIconDisplay(Icons.menu, black, UniqueKey(), 20)),
+            child:GeneralIconDisplay(Icons.menu, secondaryColor, UniqueKey(), 20)),
                     top: 25,
                     left: 20),
                 // title
                 rowPositioned(
                   child: GeneralTextDisplay(
-                      "My Cart", black, 1, 20, FontWeight.w600, "title"),
+                      "My Cart", secondaryColor, 1, 20, FontWeight.w600, "title"),
                   top: 20,
                 ),
                 // list of items in cart
@@ -72,7 +72,7 @@ class CartFirstPage extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       // name
-                                      GeneralTextDisplay("Red Wide Gown", black, 1,
+                                      GeneralTextDisplay("Red Wide Gown", secondaryColor, 1,
                                           12, FontWeight.w600, "name"),
                                       // description
                                       S(h: 5),
@@ -103,7 +103,7 @@ class CartFirstPage extends StatelessWidget {
                                       // value
                                       S(w: 15),
                                       GeneralTextDisplay(model.cartValue[index].toString(),
-                                          black, 1, 13, FontWeight.w600, "title"),
+                                          secondaryColor, 1, 13, FontWeight.w600, "title"),
                                       // add
                                       S(w: 15),
                                       GestureDetector(

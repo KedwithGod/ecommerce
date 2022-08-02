@@ -14,10 +14,19 @@ class LoginPage extends StatelessWidget {
     disposeViewModel: false,
     viewModelBuilder: () => LoginViewModel(),
     builder: (context, model, child) =>baseUi(children: [
+      // logo
+      rowPositioned(
+        child: S(
+            h:200,w:200,
+            child: Hero(
+                tag: "appLogo",
+                child: Image.asset("assets/appLogo.jpeg"))),
+        top: 10
+      ),
       // login to
       rowPositioned(
           child: GeneralTextDisplay(
-              "Login to Cardizerr", black, 1, 20, FontWeight.w700, "login"),
+              "Login to Cardizerr", secondaryColor, 1, 20, FontWeight.w700, "login"),
           top: 200),
       // sign up
       rowPositioned(

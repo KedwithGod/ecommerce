@@ -44,7 +44,7 @@ class PinTextField extends StatelessWidget {
       height:sS(context).cH(height: height),
       width:sS(context).cW(width: width),
       decoration: BoxDecoration(
-        color:black,
+        color:secondaryColor,
         borderRadius: BorderRadius.circular( MediaQuery.of(context).size.height * (4/ 768)),
           border: Border.all(
               color: errorTextActive==true?error:transparent,
@@ -61,7 +61,7 @@ class PinTextField extends StatelessWidget {
              LengthLimitingTextInputFormatter(1),
             FilteringTextInputFormatter.digitsOnly
           ],
-          cursorColor: black,
+          cursorColor: secondaryColor,
           keyboardType: keyInputType,
           controller: textFieldController,
           maxLines: textFieldLineSpan,
@@ -73,7 +73,7 @@ class PinTextField extends StatelessWidget {
           },
           style:  GoogleFonts.poppins(
             textStyle:TextStyle(
-              color: black,
+              color: normalBlack,
               fontSize: orientation == Orientation.portrait?
               sS(context).cH(height: 30):
               dynamicSize.width*(16/768),
@@ -114,7 +114,7 @@ class PinTextField extends StatelessWidget {
     dynamicSize.width*(4/768),)),
     focusedBorder: OutlineInputBorder(
     borderSide: const BorderSide(
-    color: black,
+    color: secondaryColor,
     width: 1.0,
     style: BorderStyle.solid),
     borderRadius:
@@ -222,7 +222,7 @@ class FormattedTextFields extends StatelessWidget {
             labelStyle: GoogleFonts.montserrat(
                 textStyle:TextStyle(
                     fontSize: sS(context).cH(height: hintFont),
-                    color: black,
+                    color: secondaryColor,
                     fontWeight: hintFontWeight)),
             alignLabelWithHint: false,
             hintStyle:  GoogleFonts.montserrat(

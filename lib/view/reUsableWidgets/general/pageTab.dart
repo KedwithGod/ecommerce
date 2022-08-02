@@ -15,7 +15,7 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
           BoxShadow(
             offset:const Offset(15, 0),
             blurRadius: 12,
-            color:black.withOpacity(0.15)
+            color:secondaryColor.withOpacity(0.15)
           )
         ]
       ),

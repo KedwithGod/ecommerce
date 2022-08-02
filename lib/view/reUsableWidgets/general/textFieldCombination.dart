@@ -39,7 +39,7 @@ Widget textAndTextField(context,{
               cursorColor: white,
               obscureText: obscureText??false,
               hintColor: grey,
-              outLineBorderColor: black,
+              outLineBorderColor: secondaryColor,
               focusBorderColor:errorTextActive?transparent: white,
               textFontWeight: FontWeight.w500,
               hintFontWeight: FontWeight.w400,
