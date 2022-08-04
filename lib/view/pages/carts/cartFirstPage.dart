@@ -8,10 +8,12 @@ class CartFirstPage extends StatelessWidget {
     return ViewModelBuilder<CartFirstPageViewModel>.reactive(
         onModelReady: (model) {
           model.initializeCheck();
+          model.guestStatus();
         },
         disposeViewModel: false,
         viewModelBuilder: () => CartFirstPageViewModel(),
         builder: (context, model, child) => drawer(context,
+          asGuest: model.asGuest,
           child: baseUi(children: [
                 // menu
                 rowPositioned(

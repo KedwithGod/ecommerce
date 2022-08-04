@@ -1,8 +1,5 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
 
-
-
-
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -10,6 +7,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
         onModelReady: (model) {
+          model.getUser();
     },
     disposeViewModel: false,
     viewModelBuilder: () => LoginViewModel(),
@@ -115,27 +113,24 @@ class LoginPage extends StatelessWidget {
               labelText: "Email", onChanged: (){}, inputFormatter: [], errorTextActive: model.emailError, focusNode: model.emailFocusNode,
               prefix: GeneralIconDisplay(Icons.email, primary, UniqueKey(), 20), suffix: null)
           ,top:
-          400
+          472
       ),
-      // password
+      // userName«
       rowPositioned(
           child:
           textAndTextField(context, textInputType: TextInputType.text,
-              controller: model.passwordController, hint: "Enter a secure password",
-              labelText: "Password", onChanged: (){}, inputFormatter: [], errorTextActive: model.passwordError, focusNode: model.passwordFocusNode,
-              prefix: GeneralIconDisplay(Icons.lock, primary, UniqueKey(), 20), suffix: null)
+              controller: model.usernameController, hint: "Enter your username",
+              labelText: "Username", onChanged: (){}, inputFormatter: [], errorTextActive: model.usernameError, focusNode: model.usernameFocusNode,
+              prefix: GeneralIconDisplay(Icons.person, primary, UniqueKey(), 20), suffix: null)
           ,top:
-      472
+      400
       ),
       // login
       rowPositioned(
           child: buttonWidget(
               text: "Login",
               onPressed: () {
-
-                  Navigator.pushNamed(context, '/homePage',
-                      );
-
+                model.loginUser(context);
               },
               radius: 20,
               textColor: white),
@@ -144,8 +139,7 @@ class LoginPage extends StatelessWidget {
       rowPositioned(
           child: ButtonWidget(
                 () {
-              Navigator.pushNamed(context, '/homePage',
-              );
+                  model.continueAsGuest(context);
             },
             white,
             200,

@@ -3,24 +3,24 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
 
 
-class AllWooCommerceUser{
+
+class WooCommerceCategories{
   // function to create account
-  static Future fetchListOfCustomers({
-    required String userName, required String email
-  })async{
+  static Future fetchAllCategories(
+  )async{
     Map<String, String> header = {
       "content-type": "application/json"
     };
 
-    String url = baseUrl("customers",optionalParameter: "email",optionalValue: email);
+    String url = baseUrl("products/categories")+"&per_page=100";
     var respond =
     get(Uri.parse(url), headers: header,).then((response) {
       var parsed = response.body;
-      Map<String,dynamic> decoded = json.decode(parsed)[0];
+      List decoded = json.decode(parsed);
       print(decoded);
       if (response.statusCode == 200) {
-            return UserResponse.fromJson(decoded);
-          }
+        return decoded;
+      }
 
       else {
         return WooCommerceErrorResponse.fromMap(json.decode(parsed));
@@ -29,4 +29,4 @@ class AllWooCommerceUser{
     return respond;
 
 
-}}
+  }}

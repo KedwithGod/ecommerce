@@ -2,7 +2,9 @@
 
 import '../../../model/imports/generalImport.dart';
 
-Widget drawer (context,{required Widget child,AdvancedDrawerController? controller}){
+Widget drawer (context,{required Widget child,AdvancedDrawerController? controller,
+  required bool? asGuest}){
+print("i am guest $asGuest");
   return AdvancedDrawer(
     backdropColor: desertStorm,
     controller:controller,
@@ -37,7 +39,7 @@ Widget drawer (context,{required Widget child,AdvancedDrawerController? controll
               left: 24
             ),
             // edit profile
-            drawerItem(Icons.account_box_rounded,"Login", 78,onTap: (){
+            drawerItem(Icons.account_box_rounded,asGuest==true?"Login":"Logout", 78,onTap: (){
               Navigator.pushNamed(context, '/login',
               );
             }),
@@ -47,7 +49,11 @@ Widget drawer (context,{required Widget child,AdvancedDrawerController? controll
               );
             }),
             // statement
-            drawerItem(FontAwesomeIcons.bell, "Get Notification", 174),
+            drawerItem(FontAwesomeIcons.bell, "Categories", 174,
+                onTap:(){
+                  Navigator.pushNamed(context, '/categoryHomePage');
+
+    }),
             // link account
             drawerItem(FontAwesomeIcons.globe, "Languages", 222),
             // security

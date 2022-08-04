@@ -64,7 +64,7 @@ class ProductResponse {
   List? groupedProducts;
   int? menuOrder;
   List? metaData;
-  Links? lLinks;
+  ProductLinks? lLinks;
 
   ProductResponse(
       {this.id,
@@ -229,7 +229,7 @@ class ProductResponse {
     if (json['meta_data'] != null) {
       metaData = json['meta_data'];
     }
-    lLinks = json['_links'] != null ?  Links.fromJson(json['_links']) : null;
+    lLinks = json['_links'] != null ?  ProductLinks.fromJson(json['_links']) : null;
   }
 
   
@@ -298,17 +298,17 @@ class Images {
   
 }
 
-class Links {
-  List<Self>? self;
+class ProductLinks {
+  List<ProductSelft>? self;
   List? collection;
 
-  Links({this.self, this.collection});
+  ProductLinks({this.self, this.collection});
 
-  Links.fromJson(Map<String, dynamic> json) {
+  ProductLinks.fromJson(Map<String, dynamic> json) {
     if (json['self'] != null) {
-      self = <Self>[];
+      self = <ProductSelft>[];
       json['self'].forEach((v) {
-        self!.add(new Self.fromJson(v));
+        self!.add( ProductSelft.fromJson(v));
       });
     }
     if (json['collection'] != null) {
@@ -318,12 +318,12 @@ class Links {
   
 }
 
-class Self {
+class ProductSelft {
   String? href;
 
-  Self({this.href});
+  ProductSelft({this.href});
 
-  Self.fromJson(Map<String, dynamic> json) {
+  ProductSelft.fromJson(Map<String, dynamic> json) {
     href = json['href'];
   }
 

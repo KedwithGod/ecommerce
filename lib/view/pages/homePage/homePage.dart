@@ -8,11 +8,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
         onModelReady: (model) {
-      model.products();
+      model.fetchCategoryList();
+      model.guestStatus();
     },
     disposeViewModel: false,
     viewModelBuilder: () => HomePageViewModel(),
     builder: (context, model, child) =>drawer(context,
+        asGuest: model.asGuest,
       child: baseUi(children: [
         // menu
         rowPositioned(
@@ -113,7 +115,7 @@ class HomePage extends StatelessWidget {
                           child: GeneralTextDisplay(
                               "Category", secondaryColor, 1, 15,
                               FontWeight.w600, "category"),
-                          top: 340,left:20),
+                          top: 300,left:20),
 
                       // see all
                       rowPositioned(
@@ -133,16 +135,21 @@ class HomePage extends StatelessWidget {
                                 "See All", black51, 1, 12, FontWeight.w400, "see all",
                             ),
                           ),
-                          top: 340,right:25),
+                          top: 300,right:25),
                       // category grid
                       Positioned(
-                        child: GridView.builder(
-                          itemCount: 12,
-                          physics:const NeverScrollableScrollPhysics(),
+                        child: model.categoryList.isEmpty?
+                            Center(
+                              child: loading(
+                                height: 100,width:100
+                              ),
+                            )
+                            :GridView.builder(
+                          itemCount: model.categoryList.length,
                           gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              mainAxisExtent: 265,
+                              mainAxisExtent: 250,
                               mainAxisSpacing: 15,
                               crossAxisSpacing: 12
                           ), itemBuilder:
@@ -152,41 +159,53 @@ class HomePage extends StatelessWidget {
                                   horizontal: sS(context).cW(width: 3),
                                   vertical: sS(context).cH(height: 3)
                               ),child: S(
-                            h: 265,
+                            h: 250,
                             w: 150,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  width: sS(context).cW(width: 150),
-                                  height: sS(context).cH(height: 180),
-                                  decoration: BoxDecoration(
-                                    image:const DecorationImage(image: AssetImage("assets/image.jpeg"),
-                                      fit: BoxFit.fill
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          offset: const Offset(0,4),
-                                          blurRadius: 12,
-                                          color: secondaryColor.withOpacity(0.25)
-                                      )
-                                    ],
-                                    color: white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(sS(context).cH(height: 15)),
+                                GestureDetector(
+                                  onTap:(){
+                                    Navigator.pushNamed(context, '/homePageCategory',
+                                    arguments: {
+                                      "categoryId":model.categoryList[index].id!,
+                                      "categoryName":model.categoryList[index].name!}
 
+                                    );
+                                  },
+                                  child: Container(
+                                    width: sS(context).cW(width: 150),
+                                    height: sS(context).cH(height: 150),
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(image: NetworkImage(model.categoryList[index].image==null?
+                                          "https://www.color-name.com/paper-white.color"
+                                          :model.categoryList[index].image!.src!),
+                                        fit: BoxFit.fill
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            offset: const Offset(0,4),
+                                            blurRadius: 12,
+                                            color: secondaryColor.withOpacity(0.25)
+                                        )
+                                      ],
+                                      color: white,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(sS(context).cH(height: 15)),
+
+                                      ),
                                     ),
                                   ),
                                 ),
                                 // category name
                                 S(h:10),
-                                GeneralTextDisplay("Category Name", secondaryColor, 1, 13,
+                                GeneralTextDisplay(model.categoryList[index].name!, secondaryColor, 1, 13,
                                     FontWeight.w400, "category name"),
                               ],
                             ),
                           ));
                         }, ),
-                        top: sS(context).cH(height: 375),
+                        top: sS(context).cH(height: 335),
                         left: sS(context).cW(width: 10),
                         right:sS(context).cW(width: 10),
                         bottom:sS(context).cH(height: 230),
@@ -277,7 +296,7 @@ class HomePage extends StatelessWidget {
                               }).toList(),
                             ),
                           ),
-                          top: sS(context).cH(height: 1060),
+                          top: sS(context).cH(height: 1080),
                           bottom: 0,
                           left: 0,
                           right: 0),
@@ -285,7 +304,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   ),
-                  S(h:20)
+                  S(h:50)
                 ],
               ),
             ),

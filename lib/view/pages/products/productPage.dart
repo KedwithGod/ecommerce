@@ -3,7 +3,8 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key}) : super(key: key);
+  final ProductResponse data;
+  const ProductPage({Key? key,required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,9 @@ class ProductPage extends StatelessWidget {
         width: sS(context).cW(width: 375),
         height: sS(context).cH(height: 400),
         decoration: BoxDecoration(
-          image: const DecorationImage(
+          image:  DecorationImage(
               image:
-              AssetImage("assets/image.jpeg"),
+              NetworkImage(data.images![0].src!),
               fit: BoxFit.fill),
           boxShadow: [
             BoxShadow(
@@ -68,12 +69,12 @@ class ProductPage extends StatelessWidget {
 
       // title
       rowPositioned(child:GeneralTextDisplay(
-          "Warm Zipper", secondaryColor, 1, 20, FontWeight.w800, "title"),top: 420,left: 20),
+          data.name!, secondaryColor, 1, 20, FontWeight.w800, "title"),top: 420,left: 20),
       // subtitle
       rowPositioned(child:GeneralTextDisplay(
-          "Hooded jacket", regentGray, 1, 12, FontWeight.w400, "title"),top: 450,left: 22),
+          data.type!, regentGray, 1, 12, FontWeight.w400, "title"),top: 450,left: 22),
       // amount
-      rowPositioned(child:GeneralTextDisplay("₦ 300,000", primary, 1, 20,
+      rowPositioned(child:GeneralTextDisplay(data.price!, primary, 1, 20,
           FontWeight.w700, "price"),right:22,top:440),
       // rating
       rowPositioned(child:
@@ -90,7 +91,7 @@ class ProductPage extends StatelessWidget {
             h: 100,
             w: 335,
             child: GeneralTextDisplay(
-                "A wealthy character might show off their expensive clothing. But they could also dress in modest, inexpensive-looking clothes.",
+               data.shortDescription!,
                 regentGray, 5, 13, FontWeight.w500, "details"),
           ),
           top: 503,left:22),

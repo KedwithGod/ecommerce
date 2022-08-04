@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce/model/imports/generalImport.dart';
 
 
+
 class HomePageViewModel extends BaseModel{
-// for advanced drawer
-  final advancedDrawerController = AdvancedDrawerController();
+
 
   products()async{
    // var products = await wooCommerceAPI.getAsync("products");
@@ -17,4 +17,23 @@ class HomePageViewModel extends BaseModel{
     );
     print("products $product");
   }
+
+  //category list
+List<CategoryResponse> categoryList=[];
+  fetchCategoryList()async{
+    await WooCommerceCategories.fetchAllCategories().then((value){
+      if(value is List){
+       categoryList= value.map((e){
+          return CategoryResponse.fromJson(e);
+        }).toList();
+       notifyListeners();
+       categoryList.removeAt(0);
+       notifyListeners();
+      }
+      else if(value is WooCommerceErrorResponse){
+
+      }
+    });
+  }
+
 }

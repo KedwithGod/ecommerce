@@ -176,8 +176,8 @@ class Links {
 
   factory Links.fromMap(Map<String, dynamic> map) {
     return Links(
-      self: map['self'],
-      collection: map['collection']  ,
+      self: map['self']??[],
+      collection: map['collection']??[]  ,
     );
   }
 

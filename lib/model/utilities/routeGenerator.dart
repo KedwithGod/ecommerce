@@ -1,4 +1,3 @@
-
 import '../imports/generalImport.dart';
 
 class RouteGenerator {
@@ -21,11 +20,17 @@ class RouteGenerator {
             selectedCategory:settings.arguments as List<int>
         ));
       case '/productPage':
-        return materialPage(settings,const ProductPage());
+        return materialPage(settings, ProductPage(
+          data: settings.arguments as ProductResponse,
+        ));
       case '/favoritePage':
         return materialPage(settings,const FavoritePage());
       case '/accountPage':
         return materialPage(settings,const AccountPage());
+        case '/homePageCategory':
+        return materialPage(settings, HomePageCategory(
+          data:settings.arguments as Map
+        ));
 
 
 

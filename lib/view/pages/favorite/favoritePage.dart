@@ -8,10 +8,12 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<FavoriteViewModel>.reactive(
         onModelReady: (model) {
+          model.guestStatus();
     },
     disposeViewModel: false,
     viewModelBuilder: () => FavoriteViewModel(),
     builder: (context, model, child) =>drawer(context,
+        asGuest: model.asGuest,
       child: baseUi(children: [
         rowPositioned(
          child: GestureDetector(

@@ -45,7 +45,7 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
               isSelected:tabEnum==TabEnum.categories?true:false,left:172,
               navigation: tabEnum==TabEnum.categories?(){}:
                   (){
-                Navigator.pushNamed(context, '/categoryHomePage');
+
               }
           ),
           // favorite page

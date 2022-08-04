@@ -8,4 +8,4 @@ https://javiercbk.github.io/json_to_dart/ {with null safety}
 // check for email address and username
 // store user id, on phone, user it to fetch user data, if user resume app
 
-
+// guest user can have account in order to create an history for them

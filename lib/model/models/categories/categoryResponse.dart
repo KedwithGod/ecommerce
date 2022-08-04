@@ -5,10 +5,10 @@ class CategoryResponse {
   int? parent;
   String? description;
   String? display;
-  Image? image;
+  CategoryImage? image;
   int? menuOrder;
   int? count;
-  Links? lLinks;
+  CategoryLinks? lLinks;
 
   CategoryResponse(
       {this.id,
@@ -29,15 +29,15 @@ class CategoryResponse {
     parent = json['parent'];
     description = json['description'];
     display = json['display'];
-    image = json['image'] != null ?  Image.fromJson(json['image']) : null;
+    image = json['image'] != null ?  CategoryImage.fromJson(json['image']) : null;
     menuOrder = json['menu_order'];
     count = json['count'];
-    lLinks = json['_links'] != null ?  Links.fromJson(json['_links']) : null;
+    lLinks = json['_links'] != null ?  CategoryLinks.fromJson(json['_links']) : null;
   }
 
 }
 
-class Image {
+class CategoryImage {
   int? id;
   String? dateCreated;
   String? dateCreatedGmt;
@@ -47,7 +47,7 @@ class Image {
   String? name;
   String? alt;
 
-  Image(
+  CategoryImage(
       {this.id,
         this.dateCreated,
         this.dateCreatedGmt,
@@ -57,7 +57,7 @@ class Image {
         this.name,
         this.alt});
 
-  Image.fromJson(Map<String, dynamic> json) {
+  CategoryImage.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     dateCreated = json['date_created'];
     dateCreatedGmt = json['date_created_gmt'];
@@ -68,31 +68,19 @@ class Image {
     alt = json['alt'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['date_created'] = this.dateCreated;
-    data['date_created_gmt'] = this.dateCreatedGmt;
-    data['date_modified'] = this.dateModified;
-    data['date_modified_gmt'] = this.dateModifiedGmt;
-    data['src'] = this.src;
-    data['name'] = this.name;
-    data['alt'] = this.alt;
-    return data;
-  }
 }
 
-class Links {
-  List<Self>? self;
+class CategoryLinks {
+  List<CategorySelf>? self;
   List? collection;
 
-  Links({this.self, this.collection});
+  CategoryLinks({this.self, this.collection});
 
-  Links.fromJson(Map<String, dynamic> json) {
+  CategoryLinks.fromJson(Map<String, dynamic> json) {
     if (json['self'] != null) {
-      self = <Self>[];
+      self = <CategorySelf>[];
       json['self'].forEach((v) {
-        self!.add( Self.fromJson(v));
+        self!.add( CategorySelf.fromJson(v));
       });
     }
     if (json['collection'] != null) {
@@ -102,12 +90,12 @@ class Links {
 
 }
 
-class Self {
+class CategorySelf {
   String? href;
 
-  Self({this.href});
+  CategorySelf({this.href});
 
-  Self.fromJson(Map<String, dynamic> json) {
+  CategorySelf.fromJson(Map<String, dynamic> json) {
     href = json['href'];
   }
 }

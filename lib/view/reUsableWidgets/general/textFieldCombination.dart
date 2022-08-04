@@ -36,7 +36,7 @@ Widget textAndTextField(context,{
               textFont: 15,
               hintFont: 14,
               borderRadius: 10,
-              cursorColor: white,
+              cursorColor: normalBlack,
               obscureText: obscureText??false,
               hintColor: grey,
               outLineBorderColor: secondaryColor,

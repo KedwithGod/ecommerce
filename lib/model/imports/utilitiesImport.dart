@@ -8,4 +8,5 @@ export 'package:ecommerce/model/utilities/functions/commaFormattedString.dart';
 export 'package:ecommerce/model/utilities/functions/validateEmail.dart';
 export 'package:ecommerce/model/utilities/functions/validatePassword.dart';
 export 'package:ecommerce/model/utilities/functions/validatePhoneNumber.dart';
-export 'package:ecommerce/model/utilities/urls.dart';
+export 'package:ecommerce/model/utilities/constants/urls.dart';
+export 'package:ecommerce/model/utilities/functions/sharedPreference.dart';

@@ -1,5 +1,5 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
-import 'package:ecommerce/view/reUsableWidgets/general/button.dart';
+
 
 class CategoryHomePage extends StatelessWidget {
   const CategoryHomePage({Key? key}) : super(key: key);
@@ -8,7 +8,7 @@ class CategoryHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CategoryHomePageViewModel>.reactive(
         onModelReady: (model) {
-          model.initializeCheck();
+          model.fetchCategoryList();
         },
         disposeViewModel: false,
         viewModelBuilder: () => CategoryHomePageViewModel(),
@@ -19,7 +19,7 @@ class CategoryHomePage extends StatelessWidget {
                     h: 55,
                     w: 275,
                     child: GeneralTextDisplay(
-                      "Choose your favorite fashion categories",
+                      "Choose your favorite categories",
                       secondaryColor,
                       2,
                       18,
@@ -40,34 +40,36 @@ class CategoryHomePage extends StatelessWidget {
                 child: S(
                   w: 200,
                   h: 400,
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 10,
-                    runSpacing: 20,
-                    children: [
-                      for (int index in model.itemCount) ...[
-                        S(
-                          w: 90,
-                          h: 45,
-                          child: ChoiceChip(
-                              label: GeneralTextDisplay(
-                                model.name[index],
-                                model.itemColor[index],
-                                1,
-                                12,
-                                FontWeight.w400,
-                                "item",
-                                textAlign: TextAlign.center,
-                              ),
-                              selectedColor: primary,
-                              onSelected: (onSelected) {
-                                model.onSelected(index);
-                              },
-                              backgroundColor: white,
-                              selected: model.isSelected[index]),
-                        ),
-                      ]
-                    ],
+                  child: SingleChildScrollView(
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 10,
+                      runSpacing: 20,
+                      children: [
+                        for (int index in model.itemCount) ...[
+                          S(
+                            w: 90,
+                            h: 45,
+                            child: ChoiceChip(
+                                label: GeneralTextDisplay(
+                                  model.categoryList[index].name!,
+                                  model.itemColor[index],
+                                  1,
+                                  12,
+                                  FontWeight.w400,
+                                  "item",
+                                  textAlign: TextAlign.center,
+                                ),
+                                selectedColor: primary,
+                                onSelected: (onSelected) {
+                                  model.onSelected(index);
+                                },
+                                backgroundColor: white,
+                                selected: model.isSelected[index]),
+                          ),
+                        ]
+                      ],
+                    ),
                   ),
                 ),
                 top: 130,

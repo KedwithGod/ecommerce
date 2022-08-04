@@ -21,3 +21,9 @@ List<String> carousels=[
 "https://www.q8-uc.com/wp-content/uploads/2022/05/2_2-2048x909.jpg",
 "https://www.q8-uc.com/wp-content/uploads/2022/05/1_1-2048x909.jpg"
 ];
+
+// string names
+// store registered user id
+String wooCommerceId="wooCommerceId";
+// store user as guest
+String guestUser="guestUser";

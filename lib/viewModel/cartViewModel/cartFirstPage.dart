@@ -30,7 +30,7 @@ class CartFirstPageViewModel extends BaseModel{
     notifyListeners();
   }
 
-  final advancedDrawerController = AdvancedDrawerController();
+
 }
 
 

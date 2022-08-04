@@ -7,3 +7,4 @@ export 'package:ecommerce/model/utilities/functions/numberConverter.dart';
 export 'package:ecommerce/view/reUsableWidgets/general/drawer.dart';
 export 'package:ecommerce/view/reUsableWidgets/general/textFieldCombination.dart';
 export 'package:ecommerce/view/reUsableWidgets/general/button.dart';
+export 'package:ecommerce/view/reUsableWidgets/general/loading.dart';
