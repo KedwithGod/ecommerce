@@ -7,7 +7,7 @@ class CartFirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CartFirstPageViewModel>.reactive(
         onModelReady: (model) {
-          model.initializeCheck();
+          model.initializeChartCheck();
           model.guestStatus();
         },
         disposeViewModel: false,

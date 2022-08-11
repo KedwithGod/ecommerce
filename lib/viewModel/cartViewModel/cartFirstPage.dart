@@ -18,7 +18,7 @@ class CartFirstPageViewModel extends BaseModel{
   // check box
   List<bool> isChecked=[];
 
-  initializeCheck(){
+  initializeChartCheck(){
     isChecked = List<bool>.filled(5, false);
     cartValue=List.generate(5, (index) => 1);
     notifyListeners();

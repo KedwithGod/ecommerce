@@ -139,10 +139,13 @@ class HomePage extends StatelessWidget {
                       // category grid
                       Positioned(
                         child: model.categoryList.isEmpty?
-                            Center(
-                              child: loading(
-                                height: 100,width:100
-                              ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                loading(
+                                  height: 100,width:100
+                                ),
+                              ],
                             )
                             :GridView.builder(
                           itemCount: model.categoryList.length,

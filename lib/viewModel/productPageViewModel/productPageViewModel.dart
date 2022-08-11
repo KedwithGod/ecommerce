@@ -2,10 +2,10 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 class ProductPageViewModel extends BaseModel{
   // is selected
-  bool isSelected=false;
+  bool isProductSelected=false;
 
   addToFavorite(){
-    isSelected=!isSelected;
+    isProductSelected=!isProductSelected;
     notifyListeners();
   }
 }

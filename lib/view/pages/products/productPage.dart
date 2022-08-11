@@ -60,7 +60,7 @@ class ProductPage extends StatelessWidget {
     ),
     alignment: Alignment.center,
           child: GeneralIconDisplay(FontAwesomeIcons.solidHeart,
-              model.isSelected?primary:regentGray, UniqueKey(), 25),
+              model.isProductSelected?primary:regentGray, UniqueKey(), 25),
           ),
         ),
         top:17,right:30

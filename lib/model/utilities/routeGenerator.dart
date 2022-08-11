@@ -1,3 +1,7 @@
+
+
+
+
 import '../imports/generalImport.dart';
 
 class RouteGenerator {
@@ -7,6 +11,8 @@ class RouteGenerator {
       // authentication
       case '/login':
         return materialPage(settings,const LoginPage());
+      case '/signUp':
+        return materialPage(settings,const SignUpPage());
 
         // main pages
       case '/homePage':
@@ -27,9 +33,12 @@ class RouteGenerator {
         return materialPage(settings,const FavoritePage());
       case '/accountPage':
         return materialPage(settings,const AccountPage());
-        case '/homePageCategory':
+      case '/homePageCategory':
         return materialPage(settings, HomePageCategory(
           data:settings.arguments as Map
+        ));
+      case '/quickOrder':
+        return materialPage(settings, const QuickOrderPage(
         ));
 
 

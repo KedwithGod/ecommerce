@@ -39,13 +39,13 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
                 Navigator.pushNamed(context, '/cartFirstPage');
               }
           ),
-          // categories page
-          tabWidget(context, icon: tabEnum==TabEnum.categories?
+          // quickOrder page
+          tabWidget(context, icon: tabEnum==TabEnum.quickOrder?
           FontAwesomeIcons.bellConcierge:LineIcons.conciergeBell,
-              isSelected:tabEnum==TabEnum.categories?true:false,left:172,
-              navigation: tabEnum==TabEnum.categories?(){}:
+              isSelected:tabEnum==TabEnum.quickOrder?true:false,left:172,
+              navigation: tabEnum==TabEnum.quickOrder?(){}:
                   (){
-
+                    Navigator.pushNamed(context, '/quickOrder');
               }
           ),
           // favorite page

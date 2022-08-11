@@ -9,3 +9,5 @@ https://javiercbk.github.io/json_to_dart/ {with null safety}
 // store user id, on phone, user it to fetch user data, if user resume app
 
 // guest user can have account in order to create an history for them
+
+// solve uncategoried error and error of array, i just included the array type as <Decodable>

@@ -306,8 +306,7 @@ class CategoryList extends StatelessWidget {
                   bottom: 0,
                   left: 20,
                   right: 0),
-              // page tab
-              pageTab(context, tabEnum: TabEnum.categories)
+
             ], allowBackButton: false));
   }
 }

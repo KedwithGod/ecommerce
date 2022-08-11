@@ -8,3 +8,4 @@ export 'package:ecommerce/view/uiElements/generalTextDisplay.dart';
 export 'package:ecommerce/view/uiElements/generalTextDisplay.dart';
 export 'package:ecommerce/view/uiElements/generalTextFieldDisplay.dart';
 export 'package:ecommerce/view/uiElements/dropDownButton.dart';
+export 'package:ecommerce/view/reUsableWidgets/general/dialog.dart';

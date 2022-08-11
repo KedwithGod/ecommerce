@@ -39,4 +39,24 @@ class LocalStorage {
     storage = pref.getBool(key!);
     return storage;
   }
+
+
+  //set bool into shared preferences like this
+  static Future<bool> setString(String key, String value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value).then((value) {
+      if (kDebugMode) {
+        print("value from shared preferenceWidget");
+      }
+    });
+    return true;
+  }
+
+//get bool value from shared preferences
+  static Future<String?> getString(String? key) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? storage;
+    storage = pref.getString(key!);
+    return storage;
+  }
 }

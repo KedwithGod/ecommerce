@@ -1,7 +1,4 @@
-
-
 import 'package:ecommerce/model/imports/generalImport.dart';
-
 
 
 class WooCommerceCategories{
@@ -16,17 +13,14 @@ class WooCommerceCategories{
     var respond =
     get(Uri.parse(url), headers: header,).then((response) {
       var parsed = response.body;
-      List decoded = json.decode(parsed);
+      var decoded = json.decode(parsed);
       print(decoded);
       if (response.statusCode == 200) {
         return decoded;
       }
-
       else {
         return WooCommerceErrorResponse.fromMap(json.decode(parsed));
       }
     });
     return respond;
-
-
   }}

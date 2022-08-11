@@ -28,13 +28,18 @@ class LoginPage extends StatelessWidget {
           top: 200),
       // sign up
       rowPositioned(
-          child: Row(
-            children: [
-              GeneralTextDisplay("Don't have an account? ", black51, 1, 16,
-                  FontWeight.w400, "login"),
-              GeneralTextDisplay(
-                  "Sign Up", primary, 1, 16, FontWeight.w600, "login"),
-            ],
+          child: GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context, "/signUp");
+            },
+            child: Row(
+              children: [
+                GeneralTextDisplay("Don't have an account? ", black51, 1, 16,
+                    FontWeight.w400, "login"),
+                GeneralTextDisplay(
+                    "Sign Up", primary, 1, 16, FontWeight.w600, "login"),
+              ],
+            ),
           ),
           top: 240),
       // social button
@@ -113,17 +118,17 @@ class LoginPage extends StatelessWidget {
               labelText: "Email", onChanged: (){}, inputFormatter: [], errorTextActive: model.emailError, focusNode: model.emailFocusNode,
               prefix: GeneralIconDisplay(Icons.email, primary, UniqueKey(), 20), suffix: null)
           ,top:
-          472
+          400
       ),
-      // userName«
+      // password«
       rowPositioned(
           child:
           textAndTextField(context, textInputType: TextInputType.text,
-              controller: model.usernameController, hint: "Enter your username",
-              labelText: "Username", onChanged: (){}, inputFormatter: [], errorTextActive: model.usernameError, focusNode: model.usernameFocusNode,
-              prefix: GeneralIconDisplay(Icons.person, primary, UniqueKey(), 20), suffix: null)
+              controller: model.passwordController, hint: "Enter your password",
+              labelText: "Password", onChanged: (){}, inputFormatter: [], errorTextActive: model.passwordError, focusNode: model.passwordFocusNode,
+              prefix: GeneralIconDisplay(Icons.lock, primary, UniqueKey(), 20), suffix: null)
           ,top:
-      400
+      472
       ),
       // login
       rowPositioned(

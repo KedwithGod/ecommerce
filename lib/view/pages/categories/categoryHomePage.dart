@@ -8,7 +8,7 @@ class CategoryHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CategoryHomePageViewModel>.reactive(
         onModelReady: (model) {
-          model.fetchCategoryList();
+          model.fetchCategoryList(isQuickOrder: true);
         },
         disposeViewModel: false,
         viewModelBuilder: () => CategoryHomePageViewModel(),
@@ -112,8 +112,7 @@ class CategoryHomePage extends StatelessWidget {
                     noElevation: true,
                   ),
                   top: 610),
-              // page tab
-              pageTab(context, tabEnum: TabEnum.categories)
+
             ], allowBackButton: false));
   }
 }
