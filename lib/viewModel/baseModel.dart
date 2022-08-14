@@ -49,6 +49,9 @@ class BaseModel extends ChangeNotifier{
           return ProductResponse.fromJson(e);
         }).toList();
         notifyListeners();
+        // store product list
+
+        LocalStorage.setString('productList', json.encode(value));
       }
       else if(value is WooCommerceErrorResponse){
 
@@ -124,7 +127,8 @@ class BaseModel extends ChangeNotifier{
   List<CategoryResponse> categoryList=[];
   List<int> itemCount=[];
   List<int> categoriesId=[];
-  fetchCategoryList({bool isQuickOrder=false})async{
+  fetchCategoryList(context,{bool isQuickOrder=false})async{
+
     await WooCommerceCategories.fetchAllCategories().then((value)async{
       if(value is List){
         // turn dynamic list to CategoryResponse type
@@ -145,7 +149,9 @@ class BaseModel extends ChangeNotifier{
           notifyListeners();
         }
 
-        categoryDropDown=categoryList.map((e) => e.name.toString()).toList();
+        categoryList.map((e) => e.name.toString()).toList().forEach((element) {
+          categoryDropDown.add(element);
+        });
         notifyListeners();
         // store category list of strings
         LocalStorage.setString('cat', json.encode(categoryDropDown));
@@ -204,8 +210,8 @@ updateLangDropDownValue(String value){
   }
 
 // category
-  String categoryString="";
-  List<String> categoryDropDown=[""];
+  String categoryString="Select Category";
+  List<String> categoryDropDown=["Select Category"];
 updateCategoryDropDown()async{
   String? fetch=await LocalStorage.getString("cat");
   List value=json.decode(fetch!);
@@ -217,7 +223,7 @@ updateCategoryDropDown()async{
   print("i am dropDown $dropDown");
 }
 
-  updateCategoryDropDownValue(String categoryValue,BuildContext context)async{
+updateCategoryDropDownValue(String categoryValue,BuildContext context)async{
     try{
       // update value
 
@@ -261,9 +267,18 @@ updateCategoryDropDown()async{
 
       await fetchProductDetails(categoryId:id ).then((value)  {
         Navigator.pop(context);
-        productDropDown=homePageCategoryList.map((e) => e.name.toString()).toList();
+       if(homePageCategoryList.isNotEmpty) {
+         productDropDown=homePageCategoryList.map((e) => e.name.toString()).toList();
         notifyListeners();
+
+       }
+       else if(homePageCategoryList.isEmpty){
+         productDropDown=["No product available"];
+         notifyListeners();
+       }
         updateProductDropDown();
+        updateDropDown();
+        updateCategoryDropDown();
 
         });
     }
@@ -306,8 +321,9 @@ updateCategoryDropDown()async{
 
 
 // update product list on QO(quick order)page
-List<String> productDropDown=[""];
-String productString="";
+List<String> productDropDown=["Select Product"];
+String productString="Select Product";
+double productPrice=0;
 // products
  StreamController<String> productStream=StreamController<String>.broadcast();
 
@@ -317,17 +333,23 @@ String productString="";
     print("i am product $productString");
   }
 updateQOProductDropDown(String value)async{
+   // update product String
   productString=value;
   notifyListeners();
-}
 
-String? string;
-
-updatng(){
-  string="value";
+  // set product price
+  String? productListString=await LocalStorage.getString('productList');
+  List decodedList=jsonDecode(productListString!);
+  homePageCategoryList=decodedList.map((e) => ProductResponse.fromJson(e)).toList();
   notifyListeners();
+  String unFormattedProductPrice=homePageCategoryList.firstWhere((element) => element.name==productString).regularPrice!;
+  // format string to bring out price
+  productPrice=double.parse(unFormattedProductPrice.toString());
+  notifyListeners();
+
 }
 
+// product price
 
 
 }

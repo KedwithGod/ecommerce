@@ -10,7 +10,7 @@ class CategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CategoryHomePageViewModel>.reactive(
         onModelReady: (model) {
-         selectedCategory.isEmpty? model.fetchCategoryList():model.fetchSelectedCategoryList(selectedCategory);
+         selectedCategory.isEmpty? model.fetchCategoryList(context):model.fetchSelectedCategoryList(selectedCategory);
         },
         disposeViewModel: false,
         viewModelBuilder: () => CategoryHomePageViewModel(),

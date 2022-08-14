@@ -45,6 +45,11 @@ dependencies:
   dio: ^4.0.6
   shared_preferences: ^2.0.13
   firebase_core:
+  firebase_auth:
+  cloud_firestore: ^3.4.4
+  firebase_storage:
+  google_sign_in:
+  faker: ^2.0.0
 
 
 

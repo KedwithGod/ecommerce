@@ -12,8 +12,13 @@ class CartFirstPageViewModel extends BaseModel{
 
   // decrement value
   decrement(int index){
-    cartValue[index]--;
-    notifyListeners();
+    if(cartValue[index]==1){
+
+    }
+    else{
+      cartValue[index]--;
+      notifyListeners();
+    }
   }
   // check box
   List<bool> isChecked=[];

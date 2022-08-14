@@ -8,6 +8,7 @@ class LoginPage extends StatelessWidget {
     return ViewModelBuilder<LoginViewModel>.reactive(
         onModelReady: (model) {
           model.getUser();
+
     },
     disposeViewModel: false,
     viewModelBuilder: () => LoginViewModel(),
@@ -102,6 +103,30 @@ class LoginPage extends StatelessWidget {
                 child: GeneralIconDisplay(FontAwesomeIcons.apple,
                     white, UniqueKey(), 20),
               ),
+              //phone auth
+              S(w:15),
+              GestureDetector(
+                onTap: (){
+                  phoneAuthenticationService.fireBasePhoneVerification(context, phoneNumber: "+2348151535983");
+                },
+                child: Container(
+                  width: sS(context).cW(width: 40),
+                  height: sS(context).cH(height: 40),
+                  decoration:  BoxDecoration(
+                      color: primary, shape:BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            offset:const Offset(0,4),
+                            blurRadius: 12,
+                            color: petiteOrchid.withOpacity(0.3)
+                        )
+                      ]
+                  ),
+                  alignment: Alignment.center,
+                  child: GeneralIconDisplay(FontAwesomeIcons.mobile,
+                      white, UniqueKey(), 20),
+                ),
+              ),
             ],
           ),
           top: 280),
@@ -135,7 +160,7 @@ class LoginPage extends StatelessWidget {
           child: buttonWidget(
               text: "Login",
               onPressed: () {
-                model.loginUser(context);
+                //model.loginUser(context);
               },
               radius: 20,
               textColor: white),

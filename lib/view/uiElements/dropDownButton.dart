@@ -4,10 +4,6 @@
 
 import '../../model/imports/generalImport.dart';
 
-
-
-
-
 class DropDown extends StatelessWidget {
   final List<String> itemList;
   final String? validatorText;
@@ -25,14 +21,14 @@ class DropDown extends StatelessWidget {
         this.containerColor});
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<BaseModel>.reactive(
+    return ViewModelBuilder<QuickOrderViewModel>.reactive(
         onModelReady: (model){
           if(updateValue==DropDownEnum.lang)model.updateDropDown();
           if(updateValue==DropDownEnum.category)model.updateCategoryDropDown();
           if(updateValue==DropDownEnum.product)model.updateProductDropDown();
         },
         disposeViewModel: false,
-        viewModelBuilder:()=>BaseModel(),
+        viewModelBuilder:()=>QuickOrderViewModel(),
         builder: (context, model, child)=>
 
             FormField(
@@ -42,7 +38,7 @@ class DropDown extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 16, right: 16.0),
                     decoration: BoxDecoration(
                         borderRadius:BorderRadius.all(
-                            Radius.circular(sS(context).cH(height: 5),)
+                            Radius.circular(sS(context).cH(height: 10),)
                         ),color: white,
                         border: Border.all(
                             color:borderColor?? primary

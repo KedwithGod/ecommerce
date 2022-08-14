@@ -10,3 +10,5 @@ export 'package:ecommerce/model/utilities/functions/validatePassword.dart';
 export 'package:ecommerce/model/utilities/functions/validatePhoneNumber.dart';
 export 'package:ecommerce/model/utilities/constants/urls.dart';
 export 'package:ecommerce/model/utilities/functions/sharedPreference.dart';
+export 'package:ecommerce/model/utilities/functions/dateTime.dart';
+export 'package:ecommerce/model/utilities/functions/firebaseFormattedError.dart';

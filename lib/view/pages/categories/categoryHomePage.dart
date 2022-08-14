@@ -8,7 +8,7 @@ class CategoryHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CategoryHomePageViewModel>.reactive(
         onModelReady: (model) {
-          model.fetchCategoryList(isQuickOrder: true);
+          model.fetchCategoryList(context,isQuickOrder: true);
         },
         disposeViewModel: false,
         viewModelBuilder: () => CategoryHomePageViewModel(),

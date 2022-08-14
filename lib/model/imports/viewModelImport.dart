@@ -8,3 +8,4 @@ export '../../../viewModel/favoriteViewModel/favoriteViewModel.dart';
 export '../../../viewModel/authentication/loginViewModel.dart';
 export 'package:ecommerce/viewModel/splashScreenViewModel.dart';
 export 'package:ecommerce/viewModel/quickOrderViewModel/quickOrderViewModel.dart';
+export 'package:ecommerce/model/services/wooCommerceService/accountService/wooCommerceAuth/wooCommerceCreateAccount.dart';

@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
         onModelReady: (model) {
-      model.fetchCategoryList();
+      model.fetchCategoryList(context);
       model.guestStatus();
     },
     disposeViewModel: false,

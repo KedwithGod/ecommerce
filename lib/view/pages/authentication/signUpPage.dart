@@ -135,7 +135,7 @@ class SignUpPage extends StatelessWidget {
               child: buttonWidget(
                   text: "SignUp",
                   onPressed: () {
-                    model.loginUser(context);
+                   // model.loginUser(context);
                   },
                   radius: 20,
                   textColor: white),

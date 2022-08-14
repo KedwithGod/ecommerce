@@ -12,7 +12,8 @@ Widget textAndTextField(context,{
   required Widget? prefix,
   required Widget? suffix,
   bool? obscureText,
-  Color? borderColor
+  Color? borderColor,
+  double? width,
 
 }){
   return
@@ -22,7 +23,7 @@ Widget textAndTextField(context,{
               textFieldController: controller,
               textFieldHint: hint,
               textFieldLineSpan: 1,
-              height: 52, width: 327,
+              height: 52, width:width?? 327,
               containerColor: white,
               noBorder: false, autoFocus: false,
               inputFormatters: inputFormatter,

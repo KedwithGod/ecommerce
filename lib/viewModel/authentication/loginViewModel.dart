@@ -21,10 +21,10 @@ class LoginViewModel extends BaseModel{
    await WooCommerceProducts.fetchAllProducts(categoryId: 30);
   }
 
-  // login user
+  // login user from website
 
-  loginUser(context)async {
-    /* // find user using password and email address from all customer
+  /*woocommerceUser(context)async {
+     // find user using password and email address from all customer
     await AllWooCommerceUser.fetchListOfCustomers(email: emailController.text.trim(),
         password: passwordController.text.trim()).then((value)async{
           if (value is UserResponse){
@@ -39,12 +39,81 @@ class LoginViewModel extends BaseModel{
             requestError=value.message;
             notifyListeners();
           }
-    });*/
+    });
 
 
+  }*/
+
+  // login user through firebase
+  firebaseLogin(context)async{
+    try{
+
+    }
+    on FirebaseAuthException catch(loginError){
+      // show dialog for login Error
+      showDialog(context: context, builder: (context){
+        return DialogBox(getMessageFromErrorCode(loginError), 'Login Error',DialogType.error );
+      });
+    }
   }
 
-    // continue as a guest
+  // login user through google
+  googleLogin(context)async{
+    try{
+
+    }
+    catch(loginError){
+      // show dialog for login Error
+      showDialog(context: context, builder: (context){
+        return DialogBox(getMessageFromErrorCode(loginError), 'Login Error',DialogType.error );
+      });
+    }
+  }
+
+
+  // login user through apple id
+  appleLogin(context)async{
+    try{
+
+    }
+    catch(loginError){
+      // show dialog for login Error
+      showDialog(context: context, builder: (context){
+        return DialogBox(getMessageFromErrorCode(loginError), 'Login Error',DialogType.error );
+      });
+    }
+  }
+
+
+  // login user through phone number
+  phoneLogin(context)async{
+    try{
+
+    }
+   catch(loginError){
+      // show dialog for login Error
+      showDialog(context: context, builder: (context){
+        return DialogBox(getMessageFromErrorCode(loginError), 'Login Error',DialogType.error );
+      });
+    }
+  }
+
+
+  // login user through facebook
+  facebookLogin(context)async{
+    try{
+
+    }
+     catch(loginError){
+      // show dialog for login Error
+      showDialog(context: context, builder: (context){
+        return DialogBox(getMessageFromErrorCode(loginError), 'Login Error',DialogType.error );
+      });
+    }
+  }
+
+
+  // continue as a guest
     continueAsGuest(context) async {
       await LocalStorage.setBool(guestUser, true).then((value) {
         Navigator.pushNamed(context, '/homePage');

@@ -5,11 +5,18 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 
 
+
 ScreenSize sS(BuildContext context, )=>ScreenSize(context: context);
 
 // class instances
 ValidateEmailAddress validateEmail=ValidateEmailAddress();
 ValidatePhoneNumber validatePhone=ValidatePhoneNumber();
+UserServices userService=UserServices();
+Faker fakeData=Faker();
+PhoneAuthenticationService phoneAuthenticationService=PhoneAuthenticationService();
+
+// plugin instances
+FirebaseFirestore firebaseFireStore=FirebaseFirestore.instance;
 
 // keys
 String consumerKey="ck_39971a6abfbae154c5baf5d9f98e7b1155226b07";
