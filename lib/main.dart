@@ -1,7 +1,6 @@
 
 
 import 'package:ecommerce/model/imports/generalImport.dart';
-import 'firebase_options.dart';
 
 
 

@@ -188,12 +188,7 @@ class FormattedTextFields extends StatelessWidget {
       decoration: BoxDecoration(
           color:white,
           borderRadius: BorderRadius.circular( MediaQuery.of(context).size.height * (borderRadius/ 768)),
-
-          border: Border.all(
-              color: errorTextActive==true?error:transparent,
-              width: errorTextActive==true?2.0:0.0,
-              style: BorderStyle.solid
-          )      ),
+    ),
       alignment: Alignment.center,
 
       child: TextFormField(
@@ -244,7 +239,7 @@ class FormattedTextFields extends StatelessWidget {
                     sS(context).cW(width: borderRadius))),
             focusedBorder: OutlineInputBorder(
                 borderSide: noBorder==true?BorderSide.none:  BorderSide(
-                    color:errorTextActive?transparent:primary,
+                    color:errorTextActive?error:primary,
                     width: 1.0,
                     style: BorderStyle.solid),
                 borderRadius:

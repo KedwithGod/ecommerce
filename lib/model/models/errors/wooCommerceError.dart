@@ -9,9 +9,9 @@ class WooCommerceErrorResponse{
 
   factory WooCommerceErrorResponse.fromMap(Map<String, dynamic> map) {
     return WooCommerceErrorResponse(
-      code: map['code'],
-      message: map['message'],
-      status: map["data"]['status'],
+      code: map.isEmpty?"":map['code']??"",
+      message: map.isEmpty?"":map['message']??"",
+      status: map.isEmpty?"":map["data"]['status'],
     );
   }
 }

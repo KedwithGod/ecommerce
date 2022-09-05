@@ -7,7 +7,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
         onModelReady: (model) {
-          model.getUser();
+          //model.getUser(context);
 
     },
     disposeViewModel: false,
@@ -67,22 +67,27 @@ class LoginPage extends StatelessWidget {
               ),
               // google
               S(w:15),
-              Container(
-                width: sS(context).cW(width: 40),
-                height: sS(context).cH(height: 40),
-                decoration:  BoxDecoration(
-                    color: error, shape:BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          offset:const Offset(0,4),
-                          blurRadius: 12,
-                          color: petiteOrchid.withOpacity(0.3)
-                      )
-                    ]
+              GestureDetector(
+                onTap:(){
+                  model.googleLogin(context);
+                },
+                child: Container(
+                  width: sS(context).cW(width: 40),
+                  height: sS(context).cH(height: 40),
+                  decoration:  BoxDecoration(
+                      color: error, shape:BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            offset:const Offset(0,4),
+                            blurRadius: 12,
+                            color: petiteOrchid.withOpacity(0.3)
+                        )
+                      ]
+                  ),
+                  alignment: Alignment.center,
+                  child: GeneralIconDisplay(FontAwesomeIcons.googlePlusG,
+                      white, UniqueKey(), 20),
                 ),
-                alignment: Alignment.center,
-                child: GeneralIconDisplay(FontAwesomeIcons.googlePlusG,
-                    white, UniqueKey(), 20),
               ),
               //apple
               S(w:15),
@@ -135,52 +140,123 @@ class LoginPage extends StatelessWidget {
           child: GeneralTextDisplay(
               "or", regentGray, 1, 15, FontWeight.w500, "or"),
           top: 340),
-      // email
-      rowPositioned(
-        child:
-          textAndTextField(context, textInputType: TextInputType.text,
-              controller: model.emailController, hint: "Enter email Address",
-              labelText: "Email", onChanged: (){}, inputFormatter: [], errorTextActive: model.emailError, focusNode: model.emailFocusNode,
-              prefix: GeneralIconDisplay(Icons.email, primary, UniqueKey(), 20), suffix: null)
-          ,top:
-          400
-      ),
-      // password«
-      rowPositioned(
-          child:
-          textAndTextField(context, textInputType: TextInputType.text,
-              controller: model.passwordController, hint: "Enter your password",
-              labelText: "Password", onChanged: (){}, inputFormatter: [], errorTextActive: model.passwordError, focusNode: model.passwordFocusNode,
-              prefix: GeneralIconDisplay(Icons.lock, primary, UniqueKey(), 20), suffix: null)
-          ,top:
-      472
-      ),
-      // login
-      rowPositioned(
-          child: buttonWidget(
-              text: "Login",
-              onPressed: () {
-                //model.loginUser(context);
-              },
-              radius: 20,
-              textColor: white),
-          top: 600),
-      // continue as guest
-      rowPositioned(
-          child: ButtonWidget(
-                () {
-                  model.continueAsGuest(context);
-            },
-            white,
-            200,
-            20,
-            GeneralTextDisplay("Continue as guest", regentGray, 1, 13,
-                FontWeight.w400, "skip for now"),
-            Alignment.center,
-            0,
-            noElevation: true,
+
+      Positioned(
+          child: SingleChildScrollView(
+            child: S(
+              h: 1000,
+              w: 327,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  S(h:5),
+                  // email
+                  textAndTextField(context,
+                      textInputType: TextInputType.text,
+                      controller: model.emailController,
+                      hint: "Enter email Address",
+                      labelText: "Email",
+                      onChanged: () {
+                        model.onChangedFunctionEmail();
+                      },
+                      inputFormatter: [],
+                      errorTextActive: model.emailError,
+                      focusNode: model.emailFocusNode,
+                      prefix: GeneralIconDisplay(
+                          Icons.email, primary, UniqueKey(), 20),
+                      suffix: null),
+                  S(h: 15,),
+                  if(model.emailError==true) Column(
+                    children: [
+                      GeneralTextDisplay(
+                          model.emailController.text.isEmpty?
+                          'Empty Field, enter email address!':'Please enter a valid email address!',error, 1,
+                          12, FontWeight.w400, 'email'),
+                      S(h:15),
+                    ],
+                  ),
+                  // password
+                  textAndTextField(context,
+                      textInputType: TextInputType.text,
+                      controller: model.passwordController,
+                      hint: "Enter a secured password",
+                      labelText: "Password",
+                      onChanged: () {
+                        model.onChangedFunctionPassword();
+                      },
+                      inputFormatter: [],
+                      obscureText: model.showText,
+                      errorTextActive: model.passwordError,
+                      focusNode: model.passwordFocusNode,
+                      prefix: GeneralIconDisplay(
+                          Icons.lock, primary, UniqueKey(), 20),
+                      suffix: GestureDetector(
+                          onTap: () {
+                            model.showTextFunction();
+                          },
+                          child: GeneralIconDisplay(
+                              model.showText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              primary,
+                              UniqueKey(),
+                              18))),
+                  S(h: 20,),
+                  if(model.passwordError==true)
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            S(h:60,
+                              w: 325,
+                              child: GeneralTextDisplay(
+                                model.passwordController.text.isEmpty?
+                                'Empty Field, enter password!':
+                                !isValidPassword(model.passwordController.text.trim())?
+                                'Invalid password, Length must be more than 7 and contains lower case, upper case , digit and  symbol':"", Colors.red, 4,
+                                12, FontWeight.w600, 'saving data',textAlign: TextAlign.center,),
+                            ),
+                          ],
+                        ),
+                        S(h:15),
+                      ],
+                    ),
+                  S(h: 40,),
+                  // sign up
+                  buttonWidget(
+                      text: "Login",
+                      onPressed: () {
+                        model.firebaseLogin(context);
+                      },
+                      radius: 20,
+                      textColor: white),
+
+                  // continue as guest
+                  S(h:10),
+                  ButtonWidget(
+                        () {
+                      model.continueAsGuest(context);
+                    },
+                    white,
+                    200,
+                    20,
+                    GeneralTextDisplay("Continue as guest", regentGray, 1, 13,
+                        FontWeight.w400, "skip for now"),
+                    Alignment.center,
+                    0,
+                    noElevation: true,
+                  ),
+
+                ],
+              ),
+            ),
           ),
-          top: 660),
+          top: sS(context).cH(height: 385),
+          left: sS(context).cW(width: 25),
+          right: sS(context).cW(width: 25),
+          bottom: sS(context).cH(height: 20)
+      ),
+
     ], allowBackButton: false));
   }
 }

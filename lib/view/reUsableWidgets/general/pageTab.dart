@@ -5,7 +5,7 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 
 Widget pageTab(context, {double? top, TabEnum? tabEnum}){
-  return rowPositioned(
+  return Positioned(
     child: Container(
       width: sS(context).cW(width: 375),
       height: sS(context).cH(height: 65),
@@ -66,7 +66,9 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
   }),
         ],
       ),
-    ), top:top?? 670,
+    ), bottom:0,
+    right: 0,
+    left: 0,
   );
 }
 

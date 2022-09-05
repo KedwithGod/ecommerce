@@ -11,6 +11,7 @@ class HomePageCategory extends StatelessWidget {
         onModelReady: (model) {
           model.homePageCategory(context,id: data['categoryId'],
               categoryName: data['categoryName']);
+
         },
     disposeViewModel: false,
     viewModelBuilder: () => BaseModel(),
@@ -56,7 +57,7 @@ class HomePageCategory extends StatelessWidget {
           gridDelegate:
           const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisExtent: 250,
+              mainAxisExtent: 280,
               mainAxisSpacing: 15,
               crossAxisSpacing: 12
           ), itemBuilder:
@@ -66,13 +67,16 @@ class HomePageCategory extends StatelessWidget {
                   horizontal: sS(context).cW(width: 3),
                   vertical: sS(context).cH(height: 3)
               ),child: S(
-            h: 250,
+            h: 300,
             w: 150,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap:(){
+                    // add to online cart
+                     
+                    // navigate to product page
                   Navigator.pushNamed(context, '/productPage',
                     arguments: model.homePageCategoryList[index]
                   );
@@ -106,6 +110,24 @@ class HomePageCategory extends StatelessWidget {
                 S(h:10),
                 GeneralTextDisplay(model.homePageCategoryList[index].name!, secondaryColor, 1, 13,
                     FontWeight.w400, "product name"),
+                S(h:10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // price
+                    GeneralTextDisplay("Price "+model.homePageCategoryList[index].price!, secondaryColor, 1, 13,
+                        FontWeight.w400, "product name"),
+                    S(w:20),
+                    GestureDetector(
+                      onTap:(){
+                        model.productAddToCart(index);
+                      },
+                      child: GeneralIconDisplay(FontAwesomeIcons.cartShopping,
+                          model.isProductChecked[index]==true?primary:grey, UniqueKey(), 20),
+                    ),
+
+                  ],
+                )
               ],
             ),
           ));
@@ -113,7 +135,7 @@ class HomePageCategory extends StatelessWidget {
         top: sS(context).cH(height: 70),
         left: sS(context).cW(width: 10),
         right:sS(context).cW(width: 10),
-        bottom:sS(context).cH(height: 230),
+        bottom:sS(context).cH(height: 0),
       ),
 
     ], allowBackButton: false));

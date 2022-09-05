@@ -2,6 +2,7 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 
 
+
 class ProductPage extends StatelessWidget {
   final ProductResponse data;
   const ProductPage({Key? key,required this.data}) : super(key: key);
@@ -71,8 +72,7 @@ class ProductPage extends StatelessWidget {
       rowPositioned(child:GeneralTextDisplay(
           data.name!, secondaryColor, 1, 20, FontWeight.w800, "title"),top: 420,left: 20),
       // subtitle
-      rowPositioned(child:GeneralTextDisplay(
-          data.type!, regentGray, 1, 12, FontWeight.w400, "title"),top: 450,left: 22),
+
       // amount
       rowPositioned(child:GeneralTextDisplay(data.price!, primary, 1, 20,
           FontWeight.w700, "price"),right:22,top:440),
@@ -91,7 +91,7 @@ class ProductPage extends StatelessWidget {
             h: 100,
             w: 335,
             child: GeneralTextDisplay(
-               data.shortDescription!,
+                removeHtmlTag(data.shortDescription!),
                 regentGray, 5, 13, FontWeight.w500, "details"),
           ),
           top: 503,left:22),

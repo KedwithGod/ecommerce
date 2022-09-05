@@ -14,7 +14,7 @@ class UserResponse {
   bool isPayingCustomer;
   String avatarUrl;
   WooCommerceCustomerMetaData metaData;
-  int amsRewardsPointsBalance;
+  dynamic amsRewardsPointsBalance;
   Links lLinks;
 
   UserResponse(
@@ -152,7 +152,7 @@ class Shipping {
 class WooCommerceCustomerMetaData {
   int id;
   String key;
-  String value;
+  dynamic value;
 
   WooCommerceCustomerMetaData({required this.id, required this.key, required this.value});
 

@@ -50,6 +50,8 @@ dependencies:
   firebase_storage:
   google_sign_in:
   faker: ^2.0.0
+  platform_device_id: ^1.0.1
+  nonce: ^1.2.0
 
 
 

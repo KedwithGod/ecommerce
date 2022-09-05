@@ -39,9 +39,36 @@ print("i am guest $asGuest");
               left: 24
             ),
             // edit profile
-            drawerItem(Icons.account_box_rounded,asGuest==true?"Login":"Logout", 78,onTap: (){
-              Navigator.pushNamed(context, '/login',
-              );
+            drawerItem(Icons.account_box_rounded,asGuest==true?"Login":"Logout", 78,onTap: ()async{
+              if(asGuest==true){
+                // set guest mode to false
+                await LocalStorage.setBool(guestUser, false);
+                Navigator.pushNamed(context, '/login',
+                );
+              }
+              // check sign in method and logout appropriately
+              String? signIn=await LocalStorage.getString(signInMethod);
+              print("i am sign in $signIn");
+              if(signIn==firebaseAuth){
+                // set firebase id to ""
+                await LocalStorage.setString('firebaseId',"");
+                // set woo commerce id to ""
+                await LocalStorage.setString(wooCommerceId,"");
+                FireBaseAuthClass().firebaseSignOut(context);
+                Navigator.pushNamed(context, '/login',
+                );
+              }
+
+              else if (signIn==googleAuthMethod){
+                // set firebase id to ""
+                await LocalStorage.setString('firebaseId',"");
+                // set woo commerce id to ""
+                await LocalStorage.setString(wooCommerceId,"");
+                googleSigning.googleSignOut(context);
+                Navigator.pushNamed(context, '/login',
+                );
+              }
+
             }),
             // account
             drawerItem(Icons.favorite, "My Wish List", 126,onTap:(){

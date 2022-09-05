@@ -9,3 +9,8 @@ String baseUrl(String url,{String? optionalParameter,String? optionalValue}){
       :"https://www.q8-uc.com/wp-json/wc/v3/$url?consumer_key=$consumerKey"
       "&consumer_secret=$consumerSecret";
 }
+String getCart="";
+String addToCart="";
+String removeFromCart="";
+String updateCart="";
+String deleteCartItem="";

@@ -16,10 +16,11 @@ class UserServices {
         String? photoUrl,
         required String? password,
       required String? wooCommerceId,
-
-
-
-      Map? position,  }) async {
+        bool? isGoogleSignUp=false,
+        bool? isPhoneAuth=false,
+        bool? isFacebookAuth=false,
+        bool? isAppleAuth=false,
+      }) async {
    return await firebaseFireStore.collection(collection).doc(id).set({
       "firstName": firstName,
       'lastName': lastName,
@@ -28,10 +29,15 @@ class UserServices {
       'password':password,
       "email": email,
       'photoUrl':photoUrl??"",
-      "position": position,
       'time of registration':currentTime(),
      'date of registration':currentDate('full date'),
-     "wooCommerceId":wooCommerceId
+     "wooCommerceId":wooCommerceId,
+     if(isGoogleSignUp==true) "isGoogleSignUp":true,
+     if(isPhoneAuth==true) "isPhoneAuth":true,
+     if(isFacebookAuth==true) "isFacebookAuth":true,
+     if(isAppleAuth==true) "isAppleAuth":true,
+
+
     },SetOptions(merge: true)).then((value) => true);
   }
 
@@ -67,7 +73,7 @@ class UserServices {
 
 
 
-   getAppUserById(String id) =>
+   Future<DocumentSnapshot<Map<String, dynamic>>> getAppUserById(String id) =>
       firebaseFireStore.collection(collection).doc(id).get().then((doc){
     return doc;
   });

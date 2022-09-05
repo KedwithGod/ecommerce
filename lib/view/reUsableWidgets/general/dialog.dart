@@ -7,11 +7,11 @@ Widget customDialog( child, { Alignment? align,double? x, double? y,}) {
     // for y -1 to 1 (from top to bottom)
     // for x -1 to 1 (from left to right)
     child: Material(
-      color: black51,
+      color: white,
       shape:
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: const EdgeInsets.all(15.0),
           child: child
       ),
 

@@ -49,8 +49,8 @@ class HomePage extends StatelessWidget {
                           child: SingleChildScrollView(
                             child: CarouselSlider(
                               options: CarouselOptions(
-                                height: 180.0,
-                                enlargeCenterPage: true,
+                                height: 166.0,
+                                enlargeCenterPage: false,
                                 autoPlay: true,
                                 autoPlayCurve: Curves.fastOutSlowIn,
                                 enableInfiniteScroll: false,
@@ -63,8 +63,8 @@ class HomePage extends StatelessWidget {
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        width: sS(context).cW(width: 300),
-                                        height: sS(context).cH(height: 390),
+                                        width: sS(context).cW(width: 375),
+                                        height: sS(context).cH(height: 166),
                                         decoration: BoxDecoration(
                                           image: DecorationImage(image: NetworkImage(i),
                                               fit: BoxFit.fill),
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
                           bottom: 0,
                           left: 0,
                           right: 0),
-                      // add banner
+                    /*  // add banner
                       rowPositioned(child:
                       Container(
                         width: sS(context).cW(width: 325),
@@ -109,13 +109,13 @@ class HomePage extends StatelessWidget {
 
                           ),
                         ),
-                      ), top: 170),
+                      ), top: 170),*/
                       // category
                       rowPositioned(
                           child: GeneralTextDisplay(
                               "Category", secondaryColor, 1, 15,
                               FontWeight.w600, "category"),
-                          top: 300,left:20),
+                          top: 170,left:20),
 
                       // see all
                       rowPositioned(
@@ -135,7 +135,7 @@ class HomePage extends StatelessWidget {
                                 "See All", black51, 1, 12, FontWeight.w400, "see all",
                             ),
                           ),
-                          top: 300,right:25),
+                          top: 170,right:25),
                       // category grid
                       Positioned(
                         child: model.categoryList.isEmpty?
@@ -208,7 +208,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ));
                         }, ),
-                        top: sS(context).cH(height: 335),
+                        top: sS(context).cH(height: 205),
                         left: sS(context).cW(width: 10),
                         right:sS(context).cW(width: 10),
                         bottom:sS(context).cH(height: 230),

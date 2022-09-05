@@ -3,9 +3,9 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
 
 
-class NewWooCommerceUser{
+class WooCommerceUser{
   // function to create account
- static Future createNewWooCommerceUser({
+ static Future fetchNewWooCommerceUser({
     required id,
   })async{
     Map<String, String> header = {

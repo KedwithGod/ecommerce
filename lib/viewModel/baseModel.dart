@@ -38,6 +38,7 @@ class BaseModel extends ChangeNotifier{
     fetchProductDetails();
 
 
+
   }
   List<ProductResponse> homePageCategoryList=[];
   // fetch product using homePageCategoryId
@@ -49,8 +50,9 @@ class BaseModel extends ChangeNotifier{
           return ProductResponse.fromJson(e);
         }).toList();
         notifyListeners();
-        // store product list
 
+        // initialize cart
+        initializeProductAddToCart(homePageCategoryList.length);
         LocalStorage.setString('productList', json.encode(value));
       }
       else if(value is WooCommerceErrorResponse){
@@ -64,7 +66,6 @@ class BaseModel extends ChangeNotifier{
   guestStatus()async{
     asGuest =await LocalStorage.getBool(guestUser);
     notifyListeners();
-    return LocalStorage.getBool(guestUser).then((value) => value);
   }
 
   // category
@@ -128,43 +129,98 @@ class BaseModel extends ChangeNotifier{
   List<int> itemCount=[];
   List<int> categoriesId=[];
   fetchCategoryList(context,{bool isQuickOrder=false})async{
-
-    await WooCommerceCategories.fetchAllCategories().then((value)async{
-      if(value is List){
-        // turn dynamic list to CategoryResponse type
-        categoryList= value.map((e){
-          return CategoryResponse.fromJson(e);
-        }).toList();
-        notifyListeners();
-        // remove the unCategorized item in the list
-        categoryList.removeAt(0);
-        // initialize the item count
-        itemCount=List.generate(categoryList.length, (index) => index);
-        notifyListeners();
-        // initialize category list
-        initializeCheck(categoryList.length);
-        // add category index for use
-        for(var index in itemCount){
-          categoriesId.add(categoryList[index].id!);
+    try{
+      SchedulerBinding.instance?.addPostFrameCallback((_) =>showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return dialogBox(context,
+              "Fetching Category List",
+              'Category',
+              DialogType.processing,
+              function: () {},
+              dismissText: "",
+            );
+          }));
+      await WooCommerceCategories.fetchAllCategories().then((value) async {
+        if (value is List) {
+          // turn dynamic list to CategoryResponse type
+          categoryList = value.map((e) {
+            return CategoryResponse.fromJson(e);
+          }).toList();
           notifyListeners();
+          // remove the unCategorized item in the list
+          categoryList.removeAt(0);
+          // initialize the item count
+          itemCount = List.generate(categoryList.length, (index) => index);
+          notifyListeners();
+          // initialize category list
+          initializeCheck(categoryList.length);
+          // add category index for use
+          for (var index in itemCount) {
+            categoriesId.add(categoryList[index].id!);
+            notifyListeners();
+          }
+
+          categoryList
+              .map((e) => e.name.toString())
+              .toList()
+              .forEach((element) {
+            categoryDropDown.add(element);
+          });
+          notifyListeners();
+          // store category list of strings
+          LocalStorage.setString('cat', json.encode(categoryDropDown));
+          // store the fetch categories
+          LocalStorage.setString('catList', json.encode(value));
+          await updateCategoryDropDown();
+          // fetch product details
+          if (isQuickOrder == false) productDetails();
+          Navigator.pop(context);
         }
+        else if (value is WooCommerceErrorResponse) {
+          Navigator.pop(context);
+          showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) => dialogBox(context,
+               value.message,
+                'Category',
+                DialogType.error,
+                dismissText: 'close',
+                function: () {
+                  // if the error message contains email, it is likely the email
+                  // is incorrect
 
-        categoryList.map((e) => e.name.toString()).toList().forEach((element) {
-          categoryDropDown.add(element);
-        });
-        notifyListeners();
-        // store category list of strings
-        LocalStorage.setString('cat', json.encode(categoryDropDown));
-        // store the fetch categories
-        LocalStorage.setString('catList', json.encode(value));
-        await updateCategoryDropDown();
-        // fetch product details
-        if(isQuickOrder==false)productDetails();
-      }
-      else if(value is WooCommerceErrorResponse){
+                  // if the error message contains login, it is likely to go to login pag
+                  Navigator.pop(context);
+                },
+                dismissTextColor: primary,
+              ));
+        }
+      });
+    }
+    on SocketException catch (error){
+      Navigator.pop(context);
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) => dialogBox(context,
+            "Looks like you have a bad internet connection, kindly check and try again",
+            'Network Error',
+            DialogType.error,
+            dismissText: 'close',
+            function: () {
+              // if the error message contains email, it is likely the email
+              // is incorrect
 
-      }
-    });
+              // if the error message contains login, it is likely to go to login pag
+              Navigator.pop(context);
+            },
+            dismissTextColor: primary,
+          ));
+      return error;
+    }
   }
   fetchSelectedCategoryList(List selectedIndex)async{
     await WooCommerceCategories.fetchAllCategories().then((value){
@@ -240,12 +296,12 @@ updateCategoryDropDownValue(String categoryValue,BuildContext context)async{
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    loading(),
-                    S(h:20),
                     GeneralTextDisplay(
                       "Loading products",
-                      white, 3, 14, FontWeight.w500, "",
-                      textAlign: TextAlign.center,)
+                      black51, 3, 14, FontWeight.w500, "",
+                      textAlign: TextAlign.center,),
+                    S(h:20),
+                    loading(),
                   ],
                 ),
                 align: Alignment.center),
@@ -350,6 +406,37 @@ updateQOProductDropDown(String value)async{
 }
 
 // product price
+// add to cart color
+  // cart value
+  List<int> productCartValue=[];
+  // check box
+  List<bool> isProductChecked=[];
+
+  initializeProductAddToCart(int value){
+    isProductChecked = List<bool>.filled(value, false);
+    productCartValue=List.generate(value, (index) => 1);
+    notifyListeners();
+  }
+
+  int currentIndex=0;
+  Color cartColor=grey;
+  productAddToCart(int index){
+    isProductChecked[index]= !isProductChecked[index];
+    notifyListeners();
+    if (kDebugMode) {
+      print(index);
+    }
+  }
 
 
+  // save device id to localStorage
+  saveDeviceId()async{
+    String? deviceId = await PlatformDeviceId.getDeviceId;
+    if (kDebugMode) {
+      print('i am device id'+ deviceId!);
+    }
+    LocalStorage.setString(guestUserId, deviceId!);
+  }
+
+  // add to cart function, to add a product to chart
 }
