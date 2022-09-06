@@ -38,8 +38,14 @@ print("i am guest $asGuest");
                   1, 19.08, FontWeight.w500, "500") ,top: 22,
               left: 24
             ),
-            // edit profile
-            drawerItem(Icons.account_box_rounded,asGuest==true?"Login":"Logout", 78,onTap: ()async{
+            // account
+            drawerItem(Icons.home, "Home", 78,onTap:(){
+              Navigator.pushNamed(context, '/homePage',
+              );
+            }),
+
+            // logout
+            drawerItem(Icons.account_box_rounded,asGuest==true?"Login":"Logout", 126,onTap: ()async{
               if(asGuest==true){
                 // set guest mode to false
                 await LocalStorage.setBool(guestUser, false);
@@ -71,29 +77,29 @@ print("i am guest $asGuest");
 
             }),
             // account
-            drawerItem(Icons.favorite, "My Wish List", 126,onTap:(){
+            drawerItem(Icons.favorite, "My Wish List", 174,onTap:(){
               Navigator.pushNamed(context, '/favoritePage',
               );
             }),
             // statement
-            drawerItem(FontAwesomeIcons.bell, "Categories", 174,
+            drawerItem(FontAwesomeIcons.list, "Categories", 222,
                 onTap:(){
                   Navigator.pushNamed(context, '/categoryHomePage');
 
     }),
             // link account
-            drawerItem(FontAwesomeIcons.globe, "Languages", 222),
+            drawerItem(FontAwesomeIcons.globe, "Languages", 318),
             // security
             drawerItem(Icons.money, "Currencies", 270),
             //  referral
-            drawerItem(FontAwesomeIcons.moon, "Dark theme", 318),
+            drawerItem(FontAwesomeIcons.moon, "Dark theme", 362),
             // terms of use
-            drawerItem(Icons.star, "Rate the application", 362),
+            drawerItem(Icons.star, "Rate the application", 414),
 
             // terms of use
-            drawerItem(FontAwesomeIcons.key, "Privacy and Term", 414),
+            drawerItem(FontAwesomeIcons.key, "Privacy and Term", 462),
 
-            drawerItem(Icons.info, "About Us", 462),
+            drawerItem(Icons.info, "About Us", 510),
 
             // sign out
            // drawerItem(Icons.logout_rounded, "Sign Out", 622,color:const Color.fromRGBO(255,41,41,1)),

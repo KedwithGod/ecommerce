@@ -8,6 +8,7 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 
 
+
 ScreenSize sS(BuildContext context, )=>ScreenSize(context: context);
 
 // class instances
@@ -21,6 +22,9 @@ RandomString randomString=RandomString();
 
 // plugin instances
 FirebaseFirestore firebaseFireStore=FirebaseFirestore.instance;
+
+// plugin instance
+var unescape = HtmlUnescape();
 
 // keys
 String consumerKey="ck_39971a6abfbae154c5baf5d9f98e7b1155226b07";

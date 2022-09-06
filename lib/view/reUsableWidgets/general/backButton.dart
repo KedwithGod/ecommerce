@@ -4,7 +4,7 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
 
 Widget backButton(context, { double top= 28,  double left= 17,Color? color,Color? arrowColor,double? size,
-String? navigateTo
+String? navigateTo,Function? navigator
 }) {
   return Stack(
     children: [
@@ -14,9 +14,14 @@ String? navigateTo
           children: [
             GestureDetector(
               onTap: () {
-                navigateTo!=null?
-                    Navigator.pushNamed(context, navigateTo)
-                    :Navigator.pop(context);
+                if(navigator!=null){
+                  navigator();
+                }
+               else {
+                  navigateTo != null
+                      ? Navigator.pushNamed(context, navigateTo)
+                      : Navigator.pop(context);
+                }
               },
               child: Container(
                 height: sS(context).cH(height:size?? 40),

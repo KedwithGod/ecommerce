@@ -27,7 +27,7 @@ class RouteGenerator {
         ));
       case '/productPage':
         return materialPage(settings, ProductPage(
-          data: settings.arguments as ProductResponse,
+          data: settings.arguments as List,
         ));
       case '/favoritePage':
         return materialPage(settings,const FavoritePage());

@@ -1,8 +1,5 @@
 // page tab
-
-
 import 'package:ecommerce/model/imports/generalImport.dart';
-
 
 Widget pageTab(context, {double? top, TabEnum? tabEnum}){
   return Positioned(
@@ -32,7 +29,7 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
           ),
           // cart page
           tabWidget(context, icon: tabEnum==TabEnum.cart?
-          FontAwesomeIcons.shoppingCart:LineIcons.shoppingCart,
+          FontAwesomeIcons.cartShopping:LineIcons.shoppingCart,
               isSelected:tabEnum==TabEnum.cart?true:false,left:99,
               navigation: tabEnum==TabEnum.cart?(){}:
                   (){
@@ -41,7 +38,7 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
           ),
           // quickOrder page
           tabWidget(context, icon: tabEnum==TabEnum.quickOrder?
-          FontAwesomeIcons.bellConcierge:LineIcons.conciergeBell,
+          FontAwesomeIcons.bagShopping:LineIcons.shoppingBag,
               isSelected:tabEnum==TabEnum.quickOrder?true:false,left:172,
               navigation: tabEnum==TabEnum.quickOrder?(){}:
                   (){

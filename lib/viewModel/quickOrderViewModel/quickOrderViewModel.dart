@@ -1,3 +1,5 @@
+
+
 import '../../model/imports/generalImport.dart';
 
 class QuickOrderViewModel extends BaseModel{
@@ -20,6 +22,11 @@ class QuickOrderViewModel extends BaseModel{
       notifyListeners();
     }
   }
+
+   updateCurrencyDropdown(String value, BuildContext context) {
+    loadedCurrencyString=value;
+    notifyListeners();
+   }
 
 
 }

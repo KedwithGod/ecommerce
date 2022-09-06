@@ -16,3 +16,4 @@ export 'package:faker/faker.dart';
 export 'package:ecommerce/firebase_options.dart';
 export 'package:platform_device_id/platform_device_id.dart';
 export 'package:nonce/nonce.dart';
+export 'package:html_unescape/html_unescape_small.dart';

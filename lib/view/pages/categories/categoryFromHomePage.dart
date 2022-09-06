@@ -74,11 +74,10 @@ class HomePageCategory extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap:(){
-                    // add to online cart
-                     
+                    print(model.homePageCategoryList[index].ratingCount);
                     // navigate to product page
-                  Navigator.pushNamed(context, '/productPage',
-                    arguments: model.homePageCategoryList[index]
+                  Navigator.pushReplacementNamed(context, '/productPage',
+                    arguments: [model.homePageCategoryList[index],model.isProductChecked[index],index,data]
                   );
                   },
                   child: Container(
@@ -120,7 +119,10 @@ class HomePageCategory extends StatelessWidget {
                     S(w:20),
                     GestureDetector(
                       onTap:(){
-                        model.productAddToCart(index);
+                        // add all items to cart
+                        model.productAddToCart(context,index);
+
+
                       },
                       child: GeneralIconDisplay(FontAwesomeIcons.cartShopping,
                           model.isProductChecked[index]==true?primary:grey, UniqueKey(), 20),

@@ -9,3 +9,6 @@ export 'package:ecommerce/model/services/firebaseService/authentication/fireBase
 export 'package:ecommerce/model/services/firebaseService/authentication/googleSignModel.dart';
 export 'package:ecommerce/model/services/wooCommerceService/accountService/profileService/fetchUserTransactions.dart';
 export 'package:ecommerce/model/services/wooCommerceService/accountService/profileService/fetchWalletBalance.dart';
+export 'package:ecommerce/model/services/firebaseService/database/cartApi/cartService.dart';
+export 'package:ecommerce/model/services/firebaseService/database/favoriteApi/addToFavorite.dart';
+export 'package:ecommerce/model/services/wooCommerceService/addOns/currencyList.dart';

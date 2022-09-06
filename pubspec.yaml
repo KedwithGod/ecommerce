@@ -52,6 +52,7 @@ dependencies:
   faker: ^2.0.0
   platform_device_id: ^1.0.1
   nonce: ^1.2.0
+  html_unescape: ^2.0.0
 
 
 

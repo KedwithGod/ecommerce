@@ -57,7 +57,7 @@ class DropDown extends StatelessWidget {
                         isExpanded: true,
                         style:  TextStyle(color:secondaryColor, fontSize: sS(context).cH(height: 12),fontWeight: FontWeight.w400),
                         value: updateValue==DropDownEnum.category?model.categoryString:
-                        updateValue==DropDownEnum.product?model.productString:model.dropDown,
+                        updateValue==DropDownEnum.product?model.productString:model.currencyString,
                         items: itemList
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(

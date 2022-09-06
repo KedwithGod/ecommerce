@@ -1,16 +1,17 @@
 import 'package:ecommerce/model/imports/generalImport.dart';
 
-
-
-
 class ProductPage extends StatelessWidget {
-  final ProductResponse data;
+  final List data;
   const ProductPage({Key? key,required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProductPageViewModel>.reactive(
         onModelReady: (model) {
+          // to set value for cart if it in database to true
+          model.setAddedToCart(data[1]);
+          // to load favorite if it in the database
+          model.loadFavoriteListFromDB(data[0].id.toString());
     },
     disposeViewModel: false,
     viewModelBuilder: () => ProductPageViewModel(),
@@ -21,7 +22,7 @@ class ProductPage extends StatelessWidget {
         decoration: BoxDecoration(
           image:  DecorationImage(
               image:
-              NetworkImage(data.images![0].src!),
+              NetworkImage(data[0].images![0].src!),
               fit: BoxFit.fill),
           boxShadow: [
             BoxShadow(
@@ -39,12 +40,21 @@ class ProductPage extends StatelessWidget {
         ),
       ),
       // back button
-      backButton(context,top: 17,color: fountainBlue.withOpacity(0.4)),
+      backButton(context,top: 17,color: fountainBlue.withOpacity(0.4),
+      navigator: (){
+        Navigator.pushReplacementNamed(context,  '/homePageCategory',
+            arguments: {
+              "categoryId":data[3]['categoryId'],
+              "categoryName":data[3]['categoryName']});
+
+
+      }
+      ),
       // favorite button
       rowPositioned(
         child: GestureDetector(
           onTap:(){
-            model.addToFavorite();
+            model.addToFavorite(context,productItem:data[0] );
           },
           child: Container(
           width: sS(context).cW(width: 40),
@@ -70,17 +80,21 @@ class ProductPage extends StatelessWidget {
 
       // title
       rowPositioned(child:GeneralTextDisplay(
-          data.name!, secondaryColor, 1, 20, FontWeight.w800, "title"),top: 420,left: 20),
+          data[0].name!, secondaryColor, 1, 20, FontWeight.w800, "title"),top: 420,left: 20),
       // subtitle
 
       // amount
-      rowPositioned(child:GeneralTextDisplay(data.price!, primary, 1, 20,
+      rowPositioned(child:GeneralTextDisplay(data[0].price!, primary, 1, 20,
           FontWeight.w700, "price"),right:22,top:440),
       // rating
       rowPositioned(child:
       Row(children: [
-        for(int i in [0,1,2,3,4])...[
-          GeneralIconDisplay(Icons.star, petiteOrchid, UniqueKey(), 23),
+        for(int i in List.generate(data[0].ratingCount, (index) => index))...[
+          GeneralIconDisplay(Icons.star,petiteOrchid, UniqueKey(), 23),
+          S(w:3)
+        ] ,
+        for(int i in List.generate((5-data[0].ratingCount).toInt(), (index) => index))...[
+          GeneralIconDisplay(Icons.star,grey, UniqueKey(), 23),
           S(w:3)
         ]
 
@@ -91,7 +105,7 @@ class ProductPage extends StatelessWidget {
             h: 100,
             w: 335,
             child: GeneralTextDisplay(
-                removeHtmlTag(data.shortDescription!),
+                removeHtmlTag(data[0].shortDescription!),
                 regentGray, 5, 13, FontWeight.w500, "details"),
           ),
           top: 503,left:22),
@@ -99,8 +113,15 @@ class ProductPage extends StatelessWidget {
       rowPositioned(
           child: GestureDetector(
             onTap:(){
-              Navigator.pushNamed(context, '/cartFirstPage');
+              if(model.isAddedToCart==false){
+                model.updateAddedToCart(data[2]);
+              model.addToCartFunction(context,productItem:data[0]);}
+
+              else if(model.isAddedToCart==true){
+                model.updateAddedToCart(data[2]);
+                model.deleteItemFromCart(context,productItem:data[0]);}
             },
+
             child: Container(
               width: sS(context).cW(width: 65),
               height: sS(context).cH(height: 65),
@@ -110,7 +131,7 @@ class ProductPage extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: GeneralIconDisplay(FontAwesomeIcons.cartShopping,
-                  primary, UniqueKey(), 20),
+                 model.isAddedToCart==false?grey: primary, UniqueKey(), 20),
             ),
           ),
           top:610,left:30

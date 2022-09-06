@@ -85,7 +85,7 @@ class CategoryList extends StatelessWidget {
                                                 onTap: () {
                                                   Navigator.pushNamed(
                                                       context, '/productPage',
-                                                  arguments:model.productList[selectedIndex][index] );
+                                                  arguments:[model.productList[selectedIndex][index],model.isProductChecked[index],index,] );
                                                 },
                                                 child: Container(
                                                   width: sS(context)

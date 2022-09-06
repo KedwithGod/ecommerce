@@ -11,6 +11,11 @@ class QuickOrderPage extends StatelessWidget {
           model.guestStatus();
           // fetch category list
           model.fetchCategoryList(context, isQuickOrder: true);
+          // update currency drop down
+          model.updateDropDown();
+          // fetch category of currency
+          model.fetchCurrencyFunction(context);
+
         },
         disposeViewModel: false,
         builder: (context, model, child) => drawer(context,
@@ -34,15 +39,108 @@ class QuickOrderPage extends StatelessWidget {
               ),
 
               Stack(children: [
-                // language dropdown
+                // currency dropdown
                 rowPositioned(
-                    child: S(
+                    child: model.loadedCurrencyList!=null?
+                    S(
                       w: 343,
                       h: 54,
-                      child: DropDown(
-                        UniqueKey(),
-                        model.langList,
-                        updateValue: DropDownEnum.lang,
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(
+                              sS(context).cH(height: 10),
+                            )),
+                            color: white,
+                            border: Border.all(color: primary)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            icon: Padding(
+                              padding: EdgeInsets.only(
+                                  right: sS(context).cW(width: 16.08)),
+                              child: GeneralIconDisplay(LineIcons.angleDown,
+                                  secondaryColor, UniqueKey(), 15),
+                            ),
+                            dropdownColor: white,
+                            focusColor: primary,
+                            isExpanded: true,
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: sS(context).cH(height: 12),
+                                fontWeight: FontWeight.w400),
+                            value: model.loadedCurrencyString,
+                            items: model.loadedCurrencyList!
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Container(
+                                      width: sS(context).cW(width: 343),
+                                      height: sS(context).cH(height: 40),
+                                      alignment: Alignment.centerLeft,
+                                      child: GeneralTextDisplay(
+                                          value,
+                                          secondaryColor,
+                                          1,
+                                          12,
+                                          FontWeight.w500,
+                                          '')));
+                            }).toList(),
+                            onChanged: (value) {
+                              model.updateCurrencyDropdown(
+                                  value as String, context);
+                            },
+                          ),
+                        ),
+                      ),
+                    ):S(
+                      w: 343,
+                      h: 54,
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(
+                              sS(context).cH(height: 10),
+                            )),
+                            color: white,
+                            border: Border.all(color: primary)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            icon: Padding(
+                              padding: EdgeInsets.only(
+                                  right: sS(context).cW(width: 16.08)),
+                              child: GeneralIconDisplay(LineIcons.angleDown,
+                                  secondaryColor, UniqueKey(), 15),
+                            ),
+                            dropdownColor: white,
+                            focusColor: primary,
+                            isExpanded: true,
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: sS(context).cH(height: 12),
+                                fontWeight: FontWeight.w400),
+                            value: model.currencyString,
+                            items: model.currencyList
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Container(
+                                      width: sS(context).cW(width: 343),
+                                      height: sS(context).cH(height: 40),
+                                      alignment: Alignment.centerLeft,
+                                      child: GeneralTextDisplay(
+                                          value,
+                                          secondaryColor,
+                                          1,
+                                          12,
+                                          FontWeight.w500,
+                                          '')));
+                            }).toList(),
+                            onChanged: (value) {
+                              model.updateCategoryDropDownValue(
+                                  value as String, context);
+                            },
+                          ),
+                        ),
                       ),
                     ),
                     top: 100),
@@ -162,27 +260,32 @@ class QuickOrderPage extends StatelessWidget {
                   child: Row(
                     children: [
                       // price text
-                      S(w:15),
+                      S(w: 15),
                       GeneralTextDisplay("Price", normalBlack, 1, 20,
                           FontWeight.w600, "title"),
-                      S(w:25),
+                      S(w: 25),
                       // price text field
                       S(
                         w: 250,
                         h: 54,
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 16, right: 16.0),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(
-                            sS(context).cH(height: 10),
-                          )),
-                          color: desertStorm,
-                      ),
-                    alignment: Alignment.centerLeft,
-                    child:GeneralTextDisplay("${model.productPrice*model.priceValue}", normalBlack, 1, 25,
-                        FontWeight.w600, "title") ,
-                    ),
-                  )
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 16, right: 16.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(
+                              sS(context).cH(height: 10),
+                            )),
+                            color: desertStorm,
+                          ),
+                          alignment: Alignment.centerLeft,
+                          child: GeneralTextDisplay(
+                              "${model.productPrice * model.priceValue}",
+                              normalBlack,
+                              1,
+                              25,
+                              FontWeight.w600,
+                              "title"),
+                        ),
+                      )
                     ],
                   )),
               // quantity
@@ -192,11 +295,11 @@ class QuickOrderPage extends StatelessWidget {
                   child: Row(
                     children: [
                       // price text
-                      S(w:15),
+                      S(w: 15),
                       GeneralTextDisplay("Quantity", normalBlack, 1, 15,
                           FontWeight.w400, "title"),
-                      S(w:25),
-                      // price text field
+                      S(w: 25),
+                      // quantity text field
                       Row(
                         children: [
                           // subtract
@@ -216,14 +319,64 @@ class QuickOrderPage extends StatelessWidget {
                               onTap: () {
                                 model.increment();
                               },
-                              child: GeneralIconDisplay(LineIcons.plus,
-                                  primary, UniqueKey(), 16.5))
+                              child: GeneralIconDisplay(
+                                  LineIcons.plus, primary, UniqueKey(), 16.5))
                         ],
                       )
                     ],
                   )),
               // add to cart button
-              rowPositioned(child: buttonWidget(text: "Add to Cart", onPressed: (){},textColor: white), top: 455),
+              rowPositioned(
+                  child: buttonWidget(
+                      text: "Add to Cart",
+                      onPressed: () {
+                        // add to cart
+                        if (model.productPrice > 0 ||
+                            model.productPrice > 0.0) {
+                          model.addToCartFunction(context,
+                              productItem: model.homePageCategoryList
+                                  .firstWhere((element) =>
+                                      element.name == model.productString),
+                              productQuantity: model.priceValue.toString(),
+                          currency: model.loadedCurrencyString
+                          );
+                        } else if (model.productString == "Select Product") {
+                          final snackBar = SnackBar(
+                            backgroundColor: desertStorm,
+                            content: GeneralTextDisplay(
+                              'Product is empty, choice a product',
+                              primary,
+                              1,
+                              12,
+                              FontWeight.w400,
+                              'error',
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                          // Find the ScaffoldMessenger in the widget tree
+                          // and use it to show a SnackBar.
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else if (model.productPrice == 0 ||
+                            model.productPrice == 0.0) {
+                          final snackBar = SnackBar(
+                            backgroundColor: desertStorm,
+                            content: GeneralTextDisplay(
+                              'Product is loaded, but no product is selected',
+                              primary,
+                              1,
+                              12,
+                              FontWeight.w400,
+                              'error',
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                          // Find the ScaffoldMessenger in the widget tree
+                          // and use it to show a SnackBar.
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                      textColor: white),
+                  top: 455),
               // page tab
               pageTab(context, tabEnum: TabEnum.quickOrder)
             ], allowBackButton: false),
