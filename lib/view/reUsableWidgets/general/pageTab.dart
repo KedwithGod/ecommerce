@@ -45,13 +45,21 @@ Widget pageTab(context, {double? top, TabEnum? tabEnum}){
                     Navigator.pushNamed(context, '/quickOrder');
               }
           ),
+         /* rowPositioned(
+              child: GestureDetector(
+                  onTap: (){
+                    launchInWebViewOrVC('https://tawk.to/chat/62e2bb1e54f06e12d88bceba/1g92qls4o');
+                  },
+                  child: GeneralIconDisplay(FontAwesomeIcons.circleQuestion, primary, UniqueKey(), 35)),
+              top:680 ,
+              right:20
+          )*/
           // favorite page
-          tabWidget(context, icon: tabEnum==TabEnum.favorite?
-          FontAwesomeIcons.solidHeart:LineIcons.heart,
+          tabWidget(context, icon: FontAwesomeIcons.circleQuestion,
               isSelected:tabEnum==TabEnum.favorite?true:false,right:100,
-              navigation:tabEnum==TabEnum.favorite?(){}:
+              navigation:
                   (){
-                Navigator.pushNamed(context, '/favoritePage');
+                    launchInWebViewOrVC('https://tawk.to/chat/62e2bb1e54f06e12d88bceba/1g92qls4o');
               }),
           // profile page
       tabWidget(context, icon: tabEnum==TabEnum.profile?

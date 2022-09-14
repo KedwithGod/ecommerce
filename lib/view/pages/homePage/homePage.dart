@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
         onModelReady: (model) {
       model.fetchCategoryList(context);
       model.guestStatus();
+      model.fetchAllProductReview(context);
     },
     disposeViewModel: false,
     viewModelBuilder: () => HomePageViewModel(),
@@ -57,7 +58,7 @@ class HomePage extends StatelessWidget {
                                 autoPlayAnimationDuration: const Duration(milliseconds: 600),
                                 viewportFraction: 0.6,
                               ),
-                              items: carousels.map((i) {
+                              items: model.carousels.map((i) {
                                 return Builder(
                                   builder: (BuildContext context) {
                                     return Padding(
@@ -119,20 +120,26 @@ class HomePage extends StatelessWidget {
 
                       // see all
                       rowPositioned(
-                          child: Container(
-                            width: sS(context).cW(width: 68),
-                            height: sS(context).cH(height: 20),
-                            decoration: BoxDecoration(
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context, '/categoryList',
+                                  arguments: <int>[]);
+                            },
+                            child: Container(
+                              width: sS(context).cW(width: 68),
+                              height: sS(context).cH(height: 20),
+                              decoration: BoxDecoration(
 
-                              color: fountainBlue.withOpacity(0.3),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(sS(context).cH(height: 15)),
+                                color: fountainBlue.withOpacity(0.3),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(sS(context).cH(height: 15)),
 
+                                ),
                               ),
-                            ),
-                            alignment: Alignment.center,
-                            child: GeneralTextDisplay(
-                                "See All", black51, 1, 12, FontWeight.w400, "see all",
+                              alignment: Alignment.center,
+                              child: GeneralTextDisplay(
+                                  "See All", black51, 1, 12, FontWeight.w400, "see all",
+                              ),
                             ),
                           ),
                           top: 170,right:25),

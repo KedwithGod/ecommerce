@@ -114,7 +114,7 @@ class HomePageCategory extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // price
-                    GeneralTextDisplay("Price "+model.homePageCategoryList[index].price!, secondaryColor, 1, 13,
+                    GeneralTextDisplay("Price "+model.homePageCategoryList[index].price!+ " د.ك ", secondaryColor, 1, 13,
                         FontWeight.w400, "product name"),
                     S(w:20),
                     GestureDetector(

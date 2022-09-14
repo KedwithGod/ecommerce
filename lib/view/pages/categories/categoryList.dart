@@ -152,10 +152,10 @@ class CategoryList extends StatelessWidget {
                                     GeneralTextDisplay(
                                         "Loading Categories and product",
                                         secondaryColor,
-                                        1,
+                                        2,
                                         13,
                                         FontWeight.w400,
-                                        "product name"),
+                                        "product name",textAlign: TextAlign.center,),
                                     const Spacer(),
                                   ],
                                 ),

@@ -23,6 +23,7 @@ class AddToFavoriteService{
       "productQuantity": productQuantity,
       'price':price,
       'image':image,
+      'currency':"د.ك",
       'time of registration':currentTime(),
       'date of registration':currentDate('full date'),
       'time of request':DateTime.now()

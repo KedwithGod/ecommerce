@@ -86,9 +86,14 @@ class QuickOrderPage extends StatelessWidget {
                                           '')));
                             }).toList(),
                             onChanged: (value) {
-                              model.updateCurrencyDropdown(
-                                  value as String, context);
-                            },
+                              if(value=='Select Currency'){
+
+                              }
+                             else {
+                                      model.updateCurrencyDropdown(
+                                          value as String, context);
+                                    }
+                                  },
                           ),
                         ),
                       ),
@@ -191,8 +196,13 @@ class QuickOrderPage extends StatelessWidget {
                                             '')));
                               }).toList(),
                               onChanged: (value) {
-                                model.updateCategoryDropDownValue(
-                                    value as String, context);
+                                if(value=="Select Category"){
+
+                                }
+                                else{
+                                  model.updateCategoryDropDownValue(
+                                      value as String, context);
+                                }
                               },
                             ),
                           ),
@@ -330,8 +340,42 @@ class QuickOrderPage extends StatelessWidget {
                   child: buttonWidget(
                       text: "Add to Cart",
                       onPressed: () {
+                        if(model.loadedCurrencyString=='Select Currency'){
+                          final snackBar = SnackBar(
+                            backgroundColor: desertStorm,
+                            content: GeneralTextDisplay(
+                              'You have not selected a currency',
+                              primary,
+                              1,
+                              12,
+                              FontWeight.w400,
+                              'error',
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                          // Find the ScaffoldMessenger in the widget tree
+                          // and use it to show a SnackBar.
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                       else if(model.categoryString=="Select Category"){
+                          final snackBar = SnackBar(
+                            backgroundColor: desertStorm,
+                            content: GeneralTextDisplay(
+                              'You have not selected a Category',
+                              primary,
+                              1,
+                              12,
+                              FontWeight.w400,
+                              'error',
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                          // Find the ScaffoldMessenger in the widget tree
+                          // and use it to show a SnackBar.
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                         // add to cart
-                        if (model.productPrice > 0 ||
+                        else if (model.productPrice > 0 ||
                             model.productPrice > 0.0) {
                           model.addToCartFunction(context,
                               productItem: model.homePageCategoryList
@@ -340,7 +384,8 @@ class QuickOrderPage extends StatelessWidget {
                               productQuantity: model.priceValue.toString(),
                           currency: model.loadedCurrencyString
                           );
-                        } else if (model.productString == "Select Product") {
+                        }
+                        else if (model.productString == "Select Product") {
                           final snackBar = SnackBar(
                             backgroundColor: desertStorm,
                             content: GeneralTextDisplay(
@@ -356,7 +401,8 @@ class QuickOrderPage extends StatelessWidget {
                           // Find the ScaffoldMessenger in the widget tree
                           // and use it to show a SnackBar.
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        } else if (model.productPrice == 0 ||
+                        }
+                        else if (model.productPrice == 0 ||
                             model.productPrice == 0.0) {
                           final snackBar = SnackBar(
                             backgroundColor: desertStorm,

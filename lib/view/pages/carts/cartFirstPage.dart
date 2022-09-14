@@ -135,7 +135,8 @@ class CartFirstPage extends StatelessWidget {
                                           "description"),
                                       // price
                                       S(h: 12),
-                                      GeneralTextDisplay((double.parse(model.cartItemList!.docs[index]['price'])
+                                      GeneralTextDisplay(model.cartItemList!.docs[index]['currency']=='default'?
+                            'د.ك ':model.cartItemList!.docs[index]['currency']+ " "+(double.parse(model.cartItemList!.docs[index]['price'])
                                           *model.cartValue[index]).toString(), primary, 1,
                                           15, FontWeight.w700, "price"),
                                     ],

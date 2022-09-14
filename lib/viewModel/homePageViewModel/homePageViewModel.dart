@@ -3,7 +3,10 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 
 
+
 class HomePageViewModel extends BaseModel {
+
+
 
 
   products(context) async {
@@ -36,5 +39,9 @@ class HomePageViewModel extends BaseModel {
           ));
       return error;
     }
+  }
+  // fetch all product review
+  fetchAllProductReview(BuildContext context){
+    AllProductPreview.fetchAllProductPreview();
   }
 }

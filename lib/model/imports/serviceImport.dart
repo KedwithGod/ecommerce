@@ -12,3 +12,5 @@ export 'package:ecommerce/model/services/wooCommerceService/accountService/profi
 export 'package:ecommerce/model/services/firebaseService/database/cartApi/cartService.dart';
 export 'package:ecommerce/model/services/firebaseService/database/favoriteApi/addToFavorite.dart';
 export 'package:ecommerce/model/services/wooCommerceService/addOns/currencyList.dart';
+export 'package:ecommerce/model/services/wooCommerceService/orderService/listAllOrder.dart';
+export 'package:ecommerce/model/services/wooCommerceService/productReview/productReview.dart';

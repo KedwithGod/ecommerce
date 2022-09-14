@@ -27,3 +27,6 @@ Devices/0F6C3CEB-6FE6-4232-A1D5-381C3AB64E9C/data/Containers/Data
 // firebase for database
 // flutter framework
 // dart as language
+
+plugins
+// test api in frontend-https://reqres.in/

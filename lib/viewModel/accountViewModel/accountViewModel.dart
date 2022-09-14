@@ -3,9 +3,13 @@ import 'package:ecommerce/model/imports/generalImport.dart';
 
 
 
+
+
 class AccountViewModel extends BaseModel{
   // transaction list
   List transactionList=[];
+  // order list
+  List orderList=[];
   // wallet data
   WalletBalanceResponse? walletData;
   // user data
@@ -73,5 +77,52 @@ class AccountViewModel extends BaseModel{
               },);
           });
     }
+  }
+
+  // fetch all order function
+
+  fetchAllOrderFunction(BuildContext context)async{
+    try{
+      await AllOrder.fetchAllOrderService().then((value) {
+        if (value is List) {
+          orderList =
+              value.where((element) => element['customer_id'] == 0).toList();
+          notifyListeners();
+        }
+        else if (value is Map) {
+          final snackBar = SnackBar(
+            content: GeneralTextDisplay(
+                'Unable to fetch currency List', primary, 1, 12,
+                FontWeight.w400, 'error'),
+          );
+          // Find the ScaffoldMessenger in the widget tree
+          // and use it to show a SnackBar.
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      });
+          }
+          catch (error)
+      {
+        if (error is SocketException) {
+          final snackBar = SnackBar(
+            content: GeneralTextDisplay(
+                'Unable to connect, kindly check your internet connection',
+                primary, 1, 12, FontWeight.w400, 'error'),
+          );
+          // Find the ScaffoldMessenger in the widget tree
+          // and use it to show a SnackBar.
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        else {
+          final snackBar = SnackBar(
+            content: GeneralTextDisplay(
+                error.toString(), primary, 1, 12, FontWeight.w400, 'error'),
+          );
+          // Find the ScaffoldMessenger in the widget tree
+          // and use it to show a SnackBar.
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      }
+
   }
 }

@@ -8,5 +8,5 @@ String k_m_b_generator(num number) {
   } else if (number > 999999999) {
     return "${(number / 1000000000).round().toString()} B";
   } else {
-    return number.toString();
+    return number.toStringAsFixed(1);
   }}

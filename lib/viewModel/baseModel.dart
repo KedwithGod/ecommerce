@@ -13,6 +13,8 @@ class BaseModel extends ChangeNotifier {
     "Select",
   ];
 
+  // carousel image from database
+  List carousels=[];
   // view state
   ViewState state = ViewState.idle;
 
@@ -223,6 +225,11 @@ class BaseModel extends ChangeNotifier {
           // fetch product details
           if (isQuickOrder == false) productDetails();
           Navigator.pop(context);
+          await firebaseFireStore.collection('admin').doc('carousels').get().then((value){
+            carousels=value.data()!['carousel'];
+            notifyListeners();
+          });
+
         } else if (value is WooCommerceErrorResponse) {
           Navigator.pop(context);
           showDialog(
@@ -296,16 +303,16 @@ class BaseModel extends ChangeNotifier {
 
   // lang drop down
   List<String> currencyList = ["Kuwaiti dinar", "Uruguyan peso"];
-   Set<String>? loadedCurrencyList;
+   Set<String>? loadedCurrencyList={'Select Currency'};
   String? loadedCurrencyString;
 
   // fetch currency list
-  fetchCurrencyFunction(context)async{
+  fetchCurrencyFunction(BuildContext context)async{
    await AllCurrency.fetchCurrencyService().then((value){
       if(value is List){
-        loadedCurrencyList= value.map((e) =>unescape.convert(CurrencyModel.fromJson(e).symbol)).toSet();
+        loadedCurrencyList!.addAll(value.map((e) =>unescape.convert(CurrencyModel.fromJson(e).symbol)).toSet());
         notifyListeners();
-        loadedCurrencyString=unescape.convert(value.map((e) => (CurrencyModel.fromJson(e))).toList()[0].symbol);
+        loadedCurrencyString=loadedCurrencyList!.first;
         notifyListeners();
       }
       else if (value is Map){
@@ -428,7 +435,7 @@ class BaseModel extends ChangeNotifier {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                   GeneralTextDisplay(
                     "Sorry,Unable to fetch products",
-                    white,
+                    normalBlack,
                     3,
                     14,
                     FontWeight.w500,
@@ -531,11 +538,11 @@ class BaseModel extends ChangeNotifier {
 
   // save device id to localStorage
   saveDeviceId() async {
-    String? deviceId = await PlatformDeviceId.getDeviceId;
-    if (kDebugMode) {
-      print('i am device id' + deviceId!);
-    }
-    LocalStorage.setString(guestUserId, deviceId!);
+    // String? deviceId = await PlatformDeviceId.getDeviceId;
+    // if (kDebugMode) {
+    //   print('i am device id' + deviceId!);
+    // }
+    // LocalStorage.setString(firebaseId, deviceId!);
   }
 
   // add to cart function, to add a product to chart

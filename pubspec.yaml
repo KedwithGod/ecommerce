@@ -50,10 +50,10 @@ dependencies:
   firebase_storage:
   google_sign_in:
   faker: ^2.0.0
-  platform_device_id: ^1.0.1
   nonce: ^1.2.0
   html_unescape: ^2.0.0
-
+  url_launcher: ^6.1.5
+  foloosi_plugins: ^1.0.9
 
 
 

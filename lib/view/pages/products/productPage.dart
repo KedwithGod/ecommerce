@@ -84,7 +84,7 @@ class ProductPage extends StatelessWidget {
       // subtitle
 
       // amount
-      rowPositioned(child:GeneralTextDisplay(data[0].price!, primary, 1, 20,
+      rowPositioned(child:GeneralTextDisplay(data[0].price!+ "د.ك ", primary, 1, 20,
           FontWeight.w700, "price"),right:22,top:440),
       // rating
       rowPositioned(child:
@@ -140,7 +140,7 @@ class ProductPage extends StatelessWidget {
       rowPositioned(
           child: ButtonWidget(
                 () {
-
+  launchInWebViewOrVC('https://www.q8-uc.com/checkout/');
             },
             primary,
             230,

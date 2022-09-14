@@ -1,4 +1,4 @@
-class OrderResponse {
+class OrderModel {
   int? id;
   int? parentId;
   String? number;
@@ -23,8 +23,8 @@ class OrderResponse {
   String? customerIpAddress;
   String? customerUserAgent;
   String? customerNote;
-  Billing? billing;
-  Shipping? shipping;
+  OrderBilling? billing;
+  OrderShipping? shipping;
   String? paymentMethod;
   String? paymentMethodTitle;
   String? transactionId;
@@ -33,16 +33,16 @@ class OrderResponse {
   dynamic dateCompleted;
   dynamic dateCompletedGmt;
   String? cartHash;
-  List<MetaData>? metaData;
-  List<LineItems>? lineItems;
-  List<TaxLines>? taxLines;
-  List<ShippingLines>? shippingLines;
+  List? metaData;
+  List<OrderLineItems>? lineItems;
+  List<OrderTaxLines>? taxLines;
+  List<OrderShippingLines>? shippingLines;
   List<dynamic>? feeLines;
   List<dynamic>? couponLines;
   List<dynamic>? refunds;
-  Links? lLinks;
+  OrderLinks? lLinks;
 
-  OrderResponse(
+  OrderModel(
       {this.id,
         this.parentId,
         this.number,
@@ -86,7 +86,7 @@ class OrderResponse {
         this.refunds,
         this.lLinks});
 
-  OrderResponse.fromJson(Map<String, dynamic> json) {
+  OrderModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     parentId = json['parent_id'];
     number = json['number'];
@@ -112,9 +112,9 @@ class OrderResponse {
     customerUserAgent = json['customer_user_agent'];
     customerNote = json['customer_note'];
     billing =
-    json['billing'] != null ?  Billing.fromJson(json['billing']) : null;
+    json['billing'] != null ?  OrderBilling.fromJson(json['billing']) : null;
     shipping = json['shipping'] != null
-        ?  Shipping.fromJson(json['shipping'])
+        ?  OrderShipping.fromJson(json['shipping'])
         : null;
     paymentMethod = json['payment_method'];
     paymentMethodTitle = json['payment_method_title'];
@@ -125,27 +125,25 @@ class OrderResponse {
     dateCompletedGmt = json['date_completed_gmt'];
     cartHash = json['cart_hash'];
     if (json['meta_data'] != null) {
-      metaData = <MetaData>[];
-      json['meta_data'].forEach((v) {
-        metaData!.add( MetaData.fromJson(v));
-      });
+      metaData =json['meta_data'];
+
     }
     if (json['line_items'] != null) {
-      lineItems = <LineItems>[];
+      lineItems = <OrderLineItems>[];
       json['line_items'].forEach((v) {
-        lineItems!.add( LineItems.fromJson(v));
+        lineItems!.add( OrderLineItems.fromJson(v));
       });
     }
     if (json['tax_lines'] != null) {
-      taxLines = <TaxLines>[];
+      taxLines = <OrderTaxLines>[];
       json['tax_lines'].forEach((v) {
-        taxLines!.add( TaxLines.fromJson(v));
+        taxLines!.add( OrderTaxLines.fromJson(v));
       });
     }
     if (json['shipping_lines'] != null) {
-      shippingLines = <ShippingLines>[];
+      shippingLines = <OrderShippingLines>[];
       json['shipping_lines'].forEach((v) {
-        shippingLines!.add( ShippingLines.fromJson(v));
+        shippingLines!.add( OrderShippingLines.fromJson(v));
       });
     }
     if (json['fee_lines'] != null) {
@@ -158,12 +156,12 @@ class OrderResponse {
       refunds = json['refunds'];
 
     }
-    lLinks = json['_links'] != null ?  Links.fromJson(json['_links']) : null;
+    lLinks = json['_links'] != null ?  OrderLinks.fromJson(json['_links']) : null;
   }
 
 }
 
-class Billing {
+class OrderBilling {
   String? firstName;
   String? lastName;
   String? company;
@@ -176,7 +174,7 @@ class Billing {
   String? email;
   String? phone;
 
-  Billing(
+  OrderBilling(
       {this.firstName,
         this.lastName,
         this.company,
@@ -189,7 +187,7 @@ class Billing {
         this.email,
         this.phone});
 
-  Billing.fromJson(Map<String, dynamic> json) {
+  OrderBilling.fromJson(Map<String, dynamic> json) {
     firstName = json['first_name'];
     lastName = json['last_name'];
     company = json['company'];
@@ -205,7 +203,7 @@ class Billing {
 
 }
 
-class Shipping {
+class OrderShipping {
   String? firstName;
   String? lastName;
   String? company;
@@ -216,7 +214,7 @@ class Shipping {
   String? postcode;
   String? country;
 
-  Shipping(
+  OrderShipping(
       {this.firstName,
         this.lastName,
         this.company,
@@ -227,7 +225,7 @@ class Shipping {
         this.postcode,
         this.country});
 
-  Shipping.fromJson(Map<String, dynamic> json) {
+  OrderShipping.fromJson(Map<String, dynamic> json) {
     firstName = json['first_name'];
     lastName = json['last_name'];
     company = json['company'];
@@ -242,14 +240,14 @@ class Shipping {
 
 }
 
-class MetaData {
+class OrderMetaData {
   int? id;
   String? key;
   String? value;
 
-  MetaData({this.id, this.key, this.value});
+  OrderMetaData({this.id, this.key, this.value});
 
-  MetaData.fromJson(Map<String, dynamic> json) {
+  OrderMetaData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     key = json['key'];
     value = json['value'];
@@ -257,7 +255,7 @@ class MetaData {
 
 }
 
-class LineItems {
+class OrderLineItems {
   int? id;
   String? name;
   int? productId;
@@ -268,12 +266,12 @@ class LineItems {
   String? subtotalTax;
   String? total;
   String? totalTax;
-  List<Taxes>? taxes;
-  List<MetaData>? metaData;
+  List<OrderTaxes>? taxes;
+  List<OrderMetaData>? metaData;
   String? sku;
-  int? price;
+  dynamic price;
 
-  LineItems(
+  OrderLineItems(
       {this.id,
         this.name,
         this.productId,
@@ -289,7 +287,7 @@ class LineItems {
         this.sku,
         this.price});
 
-  LineItems.fromJson(Map<String, dynamic> json) {
+  OrderLineItems.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     productId = json['product_id'];
@@ -301,15 +299,15 @@ class LineItems {
     total = json['total'];
     totalTax = json['total_tax'];
     if (json['taxes'] != null) {
-      taxes = <Taxes>[];
+      taxes = <OrderTaxes>[];
       json['taxes'].forEach((v) {
-        taxes!.add( Taxes.fromJson(v));
+        taxes!.add( OrderTaxes.fromJson(v));
       });
     }
     if (json['meta_data'] != null) {
-      metaData = <MetaData>[];
+      metaData = <OrderMetaData>[];
       json['meta_data'].forEach((v) {
-        metaData!.add( MetaData.fromJson(v));
+        metaData!.add( OrderMetaData.fromJson(v));
       });
     }
     sku = json['sku'];
@@ -318,14 +316,14 @@ class LineItems {
 
 }
 
-class Taxes {
+class OrderTaxes {
   int? id;
   String? total;
   String? subtotal;
 
-  Taxes({this.id, this.total, this.subtotal});
+  OrderTaxes({this.id, this.total, this.subtotal});
 
-  Taxes.fromJson(Map<String, dynamic> json) {
+  OrderTaxes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     total = json['total'];
     subtotal = json['subtotal'];
@@ -333,7 +331,7 @@ class Taxes {
 
 }
 
-class TaxLines {
+class OrderTaxLines {
   int? id;
   String? rateCode;
   int? rateId;
@@ -343,7 +341,7 @@ class TaxLines {
   String? shippingTaxTotal;
   List? metaData;
 
-  TaxLines(
+  OrderTaxLines(
       {this.id,
         this.rateCode,
         this.rateId,
@@ -353,7 +351,7 @@ class TaxLines {
         this.shippingTaxTotal,
         this.metaData});
 
-  TaxLines.fromJson(Map<String, dynamic> json) {
+  OrderTaxLines.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     rateCode = json['rate_code'];
     rateId = json['rate_id'];
@@ -368,7 +366,7 @@ class TaxLines {
 
 }
 
-class ShippingLines {
+class OrderShippingLines {
   int? id;
   String? methodTitle;
   String? methodId;
@@ -377,7 +375,7 @@ class ShippingLines {
   List? taxes;
   List? metaData;
 
-  ShippingLines(
+  OrderShippingLines(
       {this.id,
         this.methodTitle,
         this.methodId,
@@ -386,7 +384,7 @@ class ShippingLines {
         this.taxes,
         this.metaData});
 
-  ShippingLines.fromJson(Map<String, dynamic> json) {
+  OrderShippingLines.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     methodTitle = json['method_title'];
     methodId = json['method_id'];
@@ -402,17 +400,17 @@ class ShippingLines {
 
 }
 
-class Links {
-  List<Self>? self;
+class OrderLinks {
+  List<OrderSelf>? self;
   List? collection;
 
-  Links({this.self, this.collection});
+  OrderLinks({this.self, this.collection});
 
-  Links.fromJson(Map<String, dynamic> json) {
+  OrderLinks.fromJson(Map<String, dynamic> json) {
     if (json['self'] != null) {
-      self = <Self>[];
+      self = <OrderSelf>[];
       json['self'].forEach((v) {
-        self!.add( Self.fromJson(v));
+        self!.add( OrderSelf.fromJson(v));
       });
     }
     if (json['collection'] != null) {
@@ -421,12 +419,12 @@ class Links {
   }
 }
 
-class Self {
+class OrderSelf {
   String? href;
 
-  Self({this.href});
+  OrderSelf({this.href});
 
-  Self.fromJson(Map<String, dynamic> json) {
+  OrderSelf.fromJson(Map<String, dynamic> json) {
     href = json['href'];
   }
 

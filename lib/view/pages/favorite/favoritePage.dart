@@ -117,7 +117,8 @@ class FavoritePage extends StatelessWidget {
                                       "description"),
                                   // price
                                   S(h: 12),
-                                  GeneralTextDisplay(model.favoriteItemList!.docs[index]['price'], primary, 1, 15,
+                                  GeneralTextDisplay(
+                                  'د.ك ' + model.favoriteItemList!.docs[index]['price'], primary, 1, 15,
                                       FontWeight.w700, "price"),
                                 ],
                               ),
